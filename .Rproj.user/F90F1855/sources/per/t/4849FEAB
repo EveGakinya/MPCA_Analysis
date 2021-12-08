@@ -1,0 +1,27 @@
+{
+    "id": "4849FEAB",
+    "path": "~/18. MPCA Analysis/MPCA_Analysis/R/functions/Binary_Recoding.R",
+    "project_path": "R/functions/Binary_Recoding.R",
+    "type": "r_source",
+    "hash": "478213506",
+    "contents": "",
+    "dirty": false,
+    "created": 1638864129815.0,
+    "source_on_save": false,
+    "relative_order": 3,
+    "properties": {
+        "tempName": "Untitled1",
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "27,0",
+        "scrollLine": "0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1638880670,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1638880670560,
+    "read_only": false,
+    "read_only_alternatives": []
+}
