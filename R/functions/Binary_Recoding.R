@@ -60,11 +60,76 @@ r$hh4 <- case_when(r$child_employment_num >= 1 ~ 1, TRUE ~ 0)
 r$hh5 <-case_when(r$preg_lact == "yes" ~ 1,
                   r$preg_lact == "no"~ 0,
                   TRUE ~ NA_real_)
+
+# % of households with at least one member with a chronic disease
+r$pwd <- case_when( r$pwd == "yes" ~ 1,
+                  TRUE ~ 0)
+
+# % of households reporting being displaced as a result of the May Escalation
+r$displaced_escalation <- case_when( r$displaced_escalation == "yes" ~ 1,
+                          TRUE ~ 0)
+
+# % of households by primary shelter type reported in the 12 months prior to data collection
+r$hh6_i <- case_when(r$shelter_type == "apartment" ~ 1,
+                         TRUE ~ 0)
+
+r$hh6_ii <- case_when(r$shelter_type == "house" ~ 1,
+                         TRUE ~ 0)
+
+r$hh6_iii <- case_when(r$shelter_type == "unfinished_abandoned_building" ~ 1,
+                     TRUE ~ 0)
+
+r$hh6_iv <- case_when(r$shelter_type == "makeshift_shelter" ~ 1,
+                       TRUE ~ 0)
+
+r$hh6_v <- case_when(r$shelter_type == "collective_shelter" ~ 1,
+                      TRUE ~ 0)
+# % of households by primary shelter type reported in the 12 months prior to data collection
+r$hh7_i <- case_when(r$occupancy_arrangement == "rented" ~ 1,
+                     TRUE ~ 0)
+r$hh7_ii <- case_when(r$occupancy_arrangement == "ownership" ~ 1,
+                     TRUE ~ 0)
+r$hh7_iii <- case_when(r$occupancy_arrangement == "hosted_without_rent" ~ 1,
+                      TRUE ~ 0)
+
+r$hh7_iv <- case_when(r$occupancy_arrangement == "squatting" ~ 1,
+                       TRUE ~ 0)
 # % of households reporting fear of eviction
-r$hh6 <-case_when(r$fear_eviction == "yes" ~ 1,
+r$hh8 <-case_when(r$fear_eviction == "yes" ~ 1,
                   r$fear_eviction == "no" ~ 0,
                   TRUE ~ NA_real_)
 
+# % of HHs receiving other kinds of assistance
+r$hh9 <- case_when(r$receive_other_assistance == "yes" ~ 1,
+                   TRUE ~ 0)
+
+# Type of other assistance received
+r$food_unrwa <- case_when(r$receive_other_assistance_which == "food_unrwa" ~ 1,
+                       is.na(r$receive_other_assistance_which) ~ NA_real_,
+                       TRUE ~ 0)
+
+r$cva_unrwa <- case_when(r$receive_other_assistance_which == "cva_unrwa" ~ 1,
+                      is.na(r$receive_other_assistance_which) ~ NA_real_,
+                      TRUE ~ 0)
+r$cash_qatar <- case_when(r$receive_other_assistance_which == "cash_qatar" ~ 1,
+                       is.na(r$receive_other_assistance_which) ~ NA_real_,
+                       TRUE ~ 0)
+r$food_ingo <- case_when(r$receive_other_assistance_which == "food_ingo" ~ 1,
+                        is.na(r$receive_other_assistance_which) ~ NA_real_,
+                        TRUE ~ 0)
+
+r$food_wfp <- case_when(r$receive_other_assistance_which == "food_wfp" ~ 1,
+                       is.na(r$receive_other_assistance_which) ~ NA_real_,
+                       TRUE ~ 0)
+r$cva_cbo <- case_when(r$receive_other_assistance_which == "cva_cbo" ~ 1,
+                       is.na(r$receive_other_assistance_which) ~ NA_real_,
+                       TRUE ~ 0)
+r$cva_wfp <- case_when(r$receive_other_assistance_which == "cva_wfp" ~ 1,
+                       is.na(r$receive_other_assistance_which) ~ NA_real_,
+                       TRUE ~ 0)
+r$cva_gov <- case_when(r$receive_other_assistance_which == "cva_gov" ~ 1,
+                     is.na(r$receive_other_assistance_which) ~ NA_real_,
+                     TRUE ~ 0)
 # % of HHs reporting that transfer amount has met their basic needs
 # % of HHs reporting that transfer amount has met their cash needs
 r$amm1_i <- case_when(r$cash %in% c("mostly_able","fully_able")~1,
@@ -278,8 +343,20 @@ r$shock3 <- case_when(r$mpca_no_help_escalation_priorities.value_distributed_ins
                       r$mpca_no_help_escalation_priorities.unable_to_travel == 1 | r$mpca_no_help_escalation_priorities.atm_insecure == 1 |
                       r$mpca_no_help_escalation_priorities.cah_not_the_best_modality == 1 | r$mpca_no_help_escalation_priorities.cash_not_timely == 1 ~ 1,
                       TRUE ~ 0)
+# % of households reporting experiencing at least one shock during the period they received MPCA, excluding the May Escalation
+r$shock5 <- case_when(r$exp_shock == "yes" ~ 1,
+                      TRUE ~ 0)
+
+# % of HHs reporting reason why MPCA did not help in meeting HH needs following the May Escalation by reason
+r$shock3_i <- r$mpca_no_help_escalation_priorities.value_distributed_insufficient
+r$shock3_ii <- r$mpca_no_help_escalation_priorities.atm_out_of_service
+r$shock3_iii <- r$mpca_no_help_escalation_priorities.unable_to_travel
+r$shock3_iv <- r$mpca_no_help_escalation_priorities.atm_insecure
+r$shock3_v <- r$mpca_no_help_escalation_priorities.cah_not_the_best_modality
+r$shock3_vi <- r$mpca_no_help_escalation_priorities.cash_not_timely
+
 # % of household reporting effect of MPCA on ability to withstand shocks:shock of medical expenses
-unique(r$role_mpca_med)
+
 
 r$shocks6_i <- case_when(r$role_mpca_med %in% c("great_extend","some_extent") ~ 1,
                        r$role_mpca_med %in% c("some_extent","limited_extent") ~ 0,
@@ -341,32 +418,24 @@ r$shock7_i <- case_when(r$mpca_shock_ineffective_med.amount_small == 1 |r$mpca_s
                         r$mpca_shock_ineffective_med.cash_not_relevant == 0 ~ 0,
                         TRUE ~ NA_real_)
 
-# % of households reporting reasons MPCA was ineffective In helping withstand shocks:shock of loss of income
-r$shock7_ii <- case_when(r$mpca_shock_ineffective_loss_employ.amount_small == 1 |r$mpca_shock_ineffective_loss_employ.did_not_receive_cash_intime == 1 |
-                         r$mpca_shock_ineffective_loss_employ.did_not_receive_cash_frequently == 1 | r$mpca_shock_ineffective_loss_employ.no_access_to_atms == 1 |
-                         r$mpca_shock_ineffective_loss_employ.cash_not_relevant == 1 ~ 1,
-                         r$mpca_shock_ineffective_loss_employ.amount_small == 0 |r$mpca_shock_ineffective_loss_employ.did_not_receive_cash_intime == 0 |
-                         r$mpca_shock_ineffective_loss_employ.did_not_receive_cash_frequently == 0 | r$mpca_shock_ineffective_loss_employ.no_access_to_atms == 0 |
-                         r$mpca_shock_ineffective_loss_employ.cash_not_relevant == 0 ~ 0,
-                         TRUE ~ NA_real_)
 
-# % of households reporting reasons MPCA was ineffective In helping withstand shocks:shock of loss of inventory or produce
-r$shock7_iii <- case_when(r$mpca_shock_ineffective_loss_inventory.amount_small == 1 |r$mpca_shock_ineffective_loss_inventory.did_not_receive_cash_intime == 1 |
-                           r$mpca_shock_ineffective_loss_inventory.did_not_receive_cash_frequently == 1 | r$mpca_shock_ineffective_loss_inventory.no_access_to_atms == 1 |
-                           r$mpca_shock_ineffective_loss_inventory.cash_not_relevant == 1 ~ 1,
-                         r$mpca_shock_ineffective_loss_inventory.amount_small == 0 |r$mpca_shock_ineffective_loss_inventory.did_not_receive_cash_intime == 0 |
-                           r$mpca_shock_ineffective_loss_inventory.did_not_receive_cash_frequently == 0 | r$mpca_shock_ineffective_loss_inventory.no_access_to_atms == 0 |
-                           r$mpca_shock_ineffective_loss_inventory.cash_not_relevant == 0 ~ 0,
-                         TRUE ~ NA_real_)
+# # % of households reporting reasons MPCA was ineffective In helping withstand shocks:shock of loss of inventory or produce
+# r$shock7_iii <- case_when(r$mpca_shock_ineffective_loss_inventory.amount_small == 1 |r$mpca_shock_ineffective_loss_inventory.did_not_receive_cash_intime == 1 |
+#                            r$mpca_shock_ineffective_loss_inventory.did_not_receive_cash_frequently == 1 | r$mpca_shock_ineffective_loss_inventory.no_access_to_atms == 1 |
+#                            r$mpca_shock_ineffective_loss_inventory.cash_not_relevant == 1 ~ 1,
+#                          r$mpca_shock_ineffective_loss_inventory.amount_small == 0 |r$mpca_shock_ineffective_loss_inventory.did_not_receive_cash_intime == 0 |
+#                            r$mpca_shock_ineffective_loss_inventory.did_not_receive_cash_frequently == 0 | r$mpca_shock_ineffective_loss_inventory.no_access_to_atms == 0 |
+#                            r$mpca_shock_ineffective_loss_inventory.cash_not_relevant == 0 ~ 0,
+#                          TRUE ~ NA_real_)
 
 # % of households reporting reasons MPCA was ineffective In helping withstand shocks:shock of arrival of new household members
-r$shock7_iv <- case_when(r$mpca_shock_ineffective_new_member.amount_small == 1 |r$mpca_shock_ineffective_new_member.did_not_receive_cash_intime == 1 |
-                           r$mpca_shock_ineffective_new_member.did_not_receive_cash_frequently == 1 | r$mpca_shock_ineffective_new_member.no_access_to_atms == 1 |
-                           r$mpca_shock_ineffective_new_member.cash_not_relevant == 1 ~ 1,
-                         r$mpca_shock_ineffective_new_member.amount_small == 0 |r$mpca_shock_ineffective_new_member.did_not_receive_cash_intime == 0 |
-                           r$mpca_shock_ineffective_new_member.did_not_receive_cash_frequently == 0 | r$mpca_shock_ineffective_new_member.no_access_to_atms == 0 |
-                           r$mpca_shock_ineffective_new_member.cash_not_relevant == 0 ~ 0,
-                         TRUE ~ NA_real_)
+# r$shock7_iv <- case_when(r$mpca_shock_ineffective_new_member.amount_small == 1 |r$mpca_shock_ineffective_new_member.did_not_receive_cash_intime == 1 |
+#                            r$mpca_shock_ineffective_new_member.did_not_receive_cash_frequently == 1 | r$mpca_shock_ineffective_new_member.no_access_to_atms == 1 |
+#                            r$mpca_shock_ineffective_new_member.cash_not_relevant == 1 ~ 1,
+#                          r$mpca_shock_ineffective_new_member.amount_small == 0 |r$mpca_shock_ineffective_new_member.did_not_receive_cash_intime == 0 |
+#                            r$mpca_shock_ineffective_new_member.did_not_receive_cash_frequently == 0 | r$mpca_shock_ineffective_new_member.no_access_to_atms == 0 |
+#                            r$mpca_shock_ineffective_new_member.cash_not_relevant == 0 ~ 0,
+#                          TRUE ~ NA_real_)
 
 # % of households reporting reasons MPCA was ineffective In helping withstand shocks:shock of need to repair or replace a household item
 r$shock7_v <- case_when(r$mpca_shock_ineffective_repair_nfi.amount_small == 1 |r$mpca_shock_ineffective_repair_nfi.did_not_receive_cash_intime == 1 |
@@ -415,8 +484,8 @@ r$shock7_xi <- case_when(r$mpca_shock_ineffective_debt.amount_small == 1 |r$mpca
 
 # % of households reporting reasons MPCA was ineffective In helping withstand shocks
 
-r$shocks7 <- case_when(r$shock7_i == 1 | r$shock7_ii== 1| r$shock7_iv == 1 |r$shock7_v == 1|r$shock7_vi == 1|r$shock7_vii == 1|r$shock7_viii == 1 | r$shock7_xi == 1 ~ 1,
-                       r$shock7_i == 0 | r$shock7_ii== 0| r$shock7_iv == 0 |r$shock7_v == 0|r$shock7_vi == 0|r$shock7_vii == 0|r$shock7_viii == 0 | r$shock7_xi == 0 ~ 0,
+r$shocks7 <- case_when(r$shock7_i == 1 |r$shock7_v == 1|r$shock7_vi == 1|r$shock7_vii == 1|r$shock7_viii == 1 | r$shock7_xi == 1 ~ 1,
+                       r$shock7_i == 0 |r$shock7_v == 0|r$shock7_vi == 0|r$shock7_vii == 0|r$shock7_viii == 0 | r$shock7_xi == 0 ~ 0,
                        TRUE ~ NA_real_)
 
 # % of HHs by reported income sources
@@ -530,6 +599,50 @@ r$hh22_xii <- case_when(r$cigarettes_exp > 0 ~ 1,
 r$hh22_xiii <- case_when(r$electricity_exp > 0 ~ 1,
                          TRUE ~ 0)
 
+
+
+###Average income
+# Food
+r$hh23_i <- round(mean(r$food_exp, na.rm = TRUE),0)
+
+# Clothing and shoes 
+r$hh23_ii <- round(mean(r$clothing_exp, na.rm = TRUE),0)
+
+# housing
+r$hh23_iii <- round(mean(r$housing_exp, na.rm = TRUE),0)
+
+# home appliances 
+r$hh23_iv <- round(mean(r$appliances_exp, na.rm = TRUE),0)
+
+# Debt repayment
+r$hh23_v <- round(mean(r$debt_repayment, na.rm = TRUE),0)
+
+# house needs 
+r$hh23_vi <- round(mean(r$house_needs_exp, na.rm = TRUE),0)
+
+# health care 
+r$hh23_vii <- round(mean(r$health_exp, na.rm = TRUE),0)
+
+# transportation
+r$hh23_viii <- round(mean(r$transp_exp, na.rm = TRUE),0)
+
+# communication
+r$hh23_ix <- round(mean(r$communication_exp, na.rm = TRUE),0)
+
+# cultural and recreational activities 
+r$hh23_x <- round(mean(r$recreation_exp, na.rm = TRUE),0)
+
+# personal care 
+r$hh23_xi <- round(mean(r$personal_exp, na.rm = TRUE),0)
+
+# cigarettes and tobacco
+r$hh23_xii <- round(mean(r$cigarettes_exp, na.rm = TRUE),0)
+
+# electricity including bells, fuels, repairs
+r$hh23_xiii <- round(mean(r$electricity_exp, na.rm = TRUE),0)
+
+r$hh24 <- round(mean(r$total_exp, na.rm = TRUE),0)
+
 ##% HH relying on stress / crisis / emergency strategies to cope with a lack of food or money to buy it
 r$stress <-
   ifelse(
@@ -558,20 +671,68 @@ r$emergency <-
     0
   )
 
+r$hh25_i <- case_when(r$selling_hh_properties %in% c("no_already_did", "yes") ~ 1,
+                      r$selling_hh_properties %in% c("not_applicable", "no_no_one_in_HH") ~ 0,
+                      TRUE ~ NA_real_)
+
+r$hh25_ii <- case_when(r$spent_savings %in% c("no_already_did", "yes") ~ 1,
+                      r$spent_savings %in% c("not_applicable", "no_no_one_in_HH") ~ 0,
+                      TRUE ~ NA_real_)
+r$hh25_iii <- case_when(r$buying_goods_on_credit %in% c("no_already_did", "yes") ~ 1,
+                      r$buying_goods_on_credit %in% c("not_applicable", "no_no_one_in_HH") ~ 0,
+                      TRUE ~ NA_real_)
+
+r$hh25_iv <- case_when(r$hh_members_ate_eslewhere %in% c("no_already_did", "yes") ~ 1,
+                      r$hh_members_ate_eslewhere %in% c("not_applicable", "no_no_one_in_HH") ~ 0,
+                      TRUE ~ NA_real_)
+r$hh25_v <- case_when(r$selling_productive_assets %in% c("no_already_did", "yes") ~ 1,
+                      r$selling_productive_assets %in% c("not_applicable", "no_no_one_in_HH") ~ 0,
+                      TRUE ~ NA_real_)
+r$hh25_vi <- case_when(r$withdrew_children_from_school %in% c("no_already_did", "yes") ~ 1,
+                      r$withdrew_children_from_school %in% c("not_applicable", "no_no_one_in_HH") ~ 0,
+                      TRUE ~ NA_real_)
+r$hh25_vii <- case_when(r$school_drop_out %in% c("no_already_did", "yes") ~ 1,
+                      r$school_drop_out %in% c("not_applicable", "no_no_one_in_HH") ~ 0,
+                      TRUE ~ NA_real_)
+r$hh25_viii <- case_when(r$reduced_health_expenses %in% c("no_already_did", "yes") ~ 1,
+                      r$reduced_health_expenses %in% c("not_applicable", "no_no_one_in_HH") ~ 0,
+                      TRUE ~ NA_real_)
+r$hh25_ix <- case_when(r$engaging_in_risky_behaviour %in% c("no_already_did", "yes") ~ 1,
+                      r$engaging_in_risky_behaviour %in% c("not_applicable", "no_no_one_in_HH") ~ 0,
+                      TRUE ~ NA_real_)
+r$hh25_x <- case_when(r$sold_house_land %in% c("no_already_did", "yes") ~ 1,
+                      r$sold_house_land %in% c("not_applicable", "no_no_one_in_HH") ~ 0,
+                      TRUE ~ NA_real_)
+r$hh25_xi <- case_when(r$hh_migrated %in% c("no_already_did", "yes") ~ 1,
+                      r$hh_migrated %in% c("not_applicable", "no_no_one_in_HH") ~ 0,
+                      TRUE ~ NA_real_)
 # % of households reporting how their financial situation compares to before receiving MPCA
-r$impact2 <- case_when(r$change_financial_situation %in% c("improved_significantly","improved_somewhat") ~ "improved",
-                     r$change_financial_situation == "same_as_before" ~ "constant",
-                     r$change_financial_situation %in% c("worsened_significantly","worsened_somewhat") ~ "worsened",
-                     TRUE ~ NA_character_)
+
+r$impact2_improved <- case_when(r$change_financial_situation %in% c("improved_significantly","improved_somewhat")~ 1,
+                                TRUE ~ 0)
+
+r$impact2_constant <- case_when(r$change_financial_situation == "same_as_before" ~ 1,
+                                TRUE ~ 0)
+
+r$impact2_worsened <- case_when(r$change_financial_situation %in% c("worsened_significantly","worsened_somewhat") ~ 1,
+                                TRUE ~ 0)
 # % of households attributing their improved financial situation to My Choice 
 r$impact3 <- case_when(r$change_financial_situation_mpca %in% c("great_help","some_help") ~ 1,
                      r$change_financial_situation_mpca %in% c("did_not_help_much","did_not_help_at_all") ~ 0,
                      TRUE ~ NA_real_)
 # % of households reporting how the mental state of household members compares to before receiving MPCA
-r$impact4 <- case_when(r$change_psych_situation %in% c("improved_significantly","improved_somewhat") ~ "improved",
-                     r$change_psych_situation == "same_as_before" ~ "constant",
-                     r$change_psych_situation %in% c("worsened_significantly","worsened_somewhat") ~ "worsened",
-                     TRUE ~ NA_character_)
+
+r$impact4_improved <- case_when(r$change_psych_situation %in% c("improved_significantly","improved_somewhat")~ 1,
+                                r$change_psych_situation == "don_t_know" ~ NA_real_,
+                                TRUE ~ 0)
+
+r$impact4_constant <- case_when(r$change_psych_situation == "same_as_before" ~ 1,
+                                r$change_psych_situation == "don_t_know" ~ NA_real_,
+                                TRUE ~ 0)
+
+r$impact4_worsened <- case_when(r$change_psych_situation %in% c("worsened_significantly","worsened_somewhat") ~ 1,
+                                r$change_psych_situation == "don_t_know" ~ NA_real_,
+                                TRUE ~ 0)
 # % of households attributing their improved mental state to My Choice
 r$impact5 <- case_when(r$change_psych_situation_mpca %in% c("great_help","some_help") ~ 1,
                      r$change_psych_situation_mpca %in% c("did_not_help_much","did_not_help_at_all")~0,
@@ -579,50 +740,157 @@ r$impact5 <- case_when(r$change_psych_situation_mpca %in% c("great_help","some_h
 
 # % of HHs reporting  different changes in inter-HH behavior as a result of the MPCA by type of activity
 # Joint decision-making (e.g. more than one HH member) on household expenses
-r$impact6_i <- case_when(r$joint_decision_making %in% c("increased_greatly","increased_to_some_extent") ~ "increased",
-                     r$joint_decision_making == "neither_increased_decreased" ~ "constant",
-                     r$joint_decision_making %in% c("decreased_some_extent","decreased_greatly") ~ "decreased",
-                     TRUE ~ NA_character_)
+# r$impact6_i <- case_when(r$joint_decision_making %in% c("increased_greatly","increased_to_some_extent") ~ "increased",
+#                      r$joint_decision_making == "neither_increased_decreased" ~ "constant",
+#                      r$joint_decision_making %in% c("decreased_some_extent","decreased_greatly") ~ "decreased",
+#                      TRUE ~ NA_character_)
+
+r$p6_i_increased <- case_when(r$joint_decision_making %in% c("increased_to_some_extent","increased_greatly")~ 1,
+                                r$joint_decision_making == "prefer_not_to_answer" ~ NA_real_,
+                                TRUE ~ 0)
+
+r$p6_i_constant <- case_when(r$joint_decision_making == "neither_increased_decreased" ~ 1,
+                                r$joint_decision_making == "prefer_not_to_answer" ~ NA_real_,
+                                TRUE ~ 0)
+
+r$p6_i_decreased <- case_when(r$joint_decision_making %in% c("decreased_some_extent","decreased_greatly") ~ 1,
+                                r$joint_decision_making == "prefer_not_to_answer" ~ NA_real_,
+                                TRUE ~ 0)
 
 # Joint decision-making on whether to take loans
-r$impact6_ii <- case_when(r$joint_loans %in% c("increased_greatly","increased_to_some_extent") ~ "increased",
-                       r$joint_loans == "neither_increased_decreased" ~ "constant",
-                       r$joint_loans %in% c("decreased_some_extent","decreased_greatly") ~ "decreased",
-                       TRUE ~ NA_character_)
+# r$impact6_ii <- case_when(r$joint_loans %in% c("increased_greatly","increased_to_some_extent") ~ "increased",
+#                        r$joint_loans == "neither_increased_decreased" ~ "constant",
+#                        r$joint_loans %in% c("decreased_some_extent","decreased_greatly") ~ "decreased",
+#                        TRUE ~ NA_character_)
 
+
+
+r$p6_ii_increased <- case_when(r$joint_loans %in% c("increased_to_some_extent","increased_greatly")~ 1,
+                              r$joint_loans %in% c ("prefer_not_to_answer","don_t_know") ~ NA_real_,
+                              TRUE ~ 0)
+
+r$p6_ii_constant <- case_when(r$joint_loans == "neither_increased_decreased" ~ 1,
+                             r$joint_loans %in% c ("prefer_not_to_answer","don_t_know") ~ NA_real_,
+                             TRUE ~ 0)
+
+r$p6_ii_decreased <- case_when(r$joint_loans %in% c("decreased_some_extent","decreased_greatly") ~ 1,
+                              r$joint_loans %in% c ("prefer_not_to_answer","don_t_know") ~ NA_real_,
+                              TRUE ~ 0)
 # Joint decision-making on responsibilities of household members (e.g. work, care of the elderly)
-r$impact6_iii <- case_when(r$joint_responsibilities %in% c("increased_greatly","increased_to_some_extent") ~ "increased",
-                       r$joint_responsibilities == "neither_increased_decreased" ~ "constant",
-                       r$joint_responsibilities %in% c("decreased_some_extent","decreased_greatly") ~ "decreased",
-                       TRUE ~ NA_character_)
+# r$impact6_iii <- case_when(r$joint_responsibilities %in% c("increased_greatly","increased_to_some_extent") ~ "increased",
+#                        r$joint_responsibilities == "neither_increased_decreased" ~ "constant",
+#                        r$joint_responsibilities %in% c("decreased_some_extent","decreased_greatly") ~ "decreased",
+#                        TRUE ~ NA_character_)
+
+r$p6_iii_increased <- case_when(r$joint_responsibilities %in% c("increased_to_some_extent","increased_greatly")~ 1,
+                               r$joint_responsibilities == "don_t_know" ~ NA_real_,
+                               is.na(r$joint_responsibilities) ~NA_real_,
+                               TRUE ~ 0)
+
+r$p6_iii_constant <- case_when(r$joint_responsibilities == "neither_increased_decreased" ~ 1,
+                               r$joint_responsibilities == "don_t_know" ~ NA_real_,
+                               is.na(r$joint_responsibilities) ~NA_real_,
+                              TRUE ~ 0)
+
+r$p6_iii_decreased <- case_when(r$joint_responsibilities %in% c("decreased_some_extent","decreased_greatly") ~ 1,
+                                r$joint_responsibilities == "don_t_know" ~ NA_real_,
+                                is.na(r$joint_responsibilities) ~NA_real_,
+                               TRUE ~ 0)
+
 # Disputes within household on how to spend money
-r$impact6_iv <- case_when(r$spending_disputes %in% c("increased_greatly","increased_to_some_extent") ~ "increased",
-                       r$spending_disputes == "neither_increased_decreased" ~ "constant",
-                       r$spending_disputes %in% c("decreased_some_extent","decreased_greatly") ~ "decreased",
-                       TRUE ~ NA_character_)
+# r$impact6_iv <- case_when(r$spending_disputes %in% c("increased_greatly","increased_to_some_extent") ~ "increased",
+#                        r$spending_disputes == "neither_increased_decreased" ~ "constant",
+#                        r$spending_disputes %in% c("decreased_some_extent","decreased_greatly") ~ "decreased",
+#                        TRUE ~ NA_character_)
+r$p6_iv_increased <- case_when(r$spending_disputes %in% c("increased_to_some_extent","increased_greatly")~ 1,
+                                r$spending_disputes %in% c ("prefer_not_to_answer","don_t_know") ~ NA_real_,
+                                TRUE ~ 0)
+
+r$p6_iv_constant <- case_when(r$spending_disputes == "neither_increased_decreased" ~ 1,
+                               r$spending_disputes %in% c ("prefer_not_to_answer","don_t_know") ~ NA_real_,
+                               TRUE ~ 0)
+
+r$p6_iv_decreased <- case_when(r$spending_disputes %in% c("decreased_some_extent","decreased_greatly") ~ 1,
+                                r$spending_disputes %in% c ("prefer_not_to_answer","don_t_know") ~ NA_real_,
+                                TRUE ~ 0)
+
 # Disputes with creditors
-r$impact6_v <- case_when(r$disputes_with_creditors %in% c("increased_greatly","increased_to_some_extent") ~ "increased",
-                       r$disputes_with_creditors == "neither_increased_decreased" ~ "constant",
-                       r$disputes_with_creditors %in% c("decreased_some_extent","decreased_greatly") ~ "decreased",
-                       TRUE ~ NA_character_)
+# r$impact6_v <- case_when(r$disputes_with_creditors %in% c("increased_greatly","increased_to_some_extent") ~ "increased",
+#                        r$disputes_with_creditors == "neither_increased_decreased" ~ "constant",
+#                        r$disputes_with_creditors %in% c("decreased_some_extent","decreased_greatly") ~ "decreased",
+#                        TRUE ~ NA_character_)
+
+r$p6_v_increased <- case_when(r$disputes_with_creditors %in% c("increased_to_some_extent","increased_greatly")~ 1,
+                              TRUE ~ 0)
+
+r$p6_v_constant <- case_when(r$disputes_with_creditors == "neither_increased_decreased" ~ 1,
+                              TRUE ~ 0)
+
+r$p6_v_decreased <- case_when(r$disputes_with_creditors %in% c("decreased_some_extent","decreased_greatly") ~ 1,
+                               TRUE ~ 0)
 
 
+# % of households reporting an increase in household member dignity as a result of My Choice
+r$impact7 <- case_when(r$change_dignity_mpca == "yes" ~ 1,
+                       TRUE ~ 0)
 # % of households reporting changes with relatives as a result of receiving MPCA through My Choice
 
-r$sat1 <- case_when(r$change_relations_relatives %in% c("relation_improved_significantly","relation_improved_some_extend") ~ "improved",
-                  r$change_relations_relatives == "not_changed" ~ "constant",
-                  r$change_relations_relatives %in% c("relation_worsened_some_extent","relation_worsened_significantly") ~ "worsened",
-                  TRUE ~ NA_character_)
+r$s1_improved <- case_when(r$change_relations_relatives %in% c("relation_improved_significantly","relation_improved_some_extend") ~ 1,
+                             TRUE ~ 0)
+r$s1_constant <- case_when(r$change_relations_relatives == "not_changed" ~ 1,
+                             TRUE ~ 0)
+r$s1_worsened <- case_when(r$change_relations_relatives %in% c("relation_worsened_some_extent","relation_worsened_significantly") ~1,
+                             TRUE ~ 0)
 
 # % of households reporting changes with other households or community members since receiving MPCA through My Choice
-r$sat3 <- case_when(r$changes_relations_community %in% c("relation_improved_significantly","relation_improved_some_extend") ~ "improved",
-                    r$changes_relations_community == "not_changed" ~ "constant",
-                    r$changes_relations_community %in% c("relation_worsened_some_extent","relation_worsened_significantly") ~ "worsened",
-                    TRUE ~ NA_character_)
 
+
+r$s3_improved <- case_when(r$changes_relations_community %in% c("relation_improved_significantly","relation_improved_some_extend") ~ 1,
+                             TRUE ~ 0)
+r$s3_constant <- case_when(r$changes_relations_community == "not_changed" ~ 1,
+                             TRUE ~ 0)
+r$s3_worsened <- case_when(r$changes_relations_community %in% c("relation_worsened_some_extent","relation_worsened_significantly") ~1,
+                             TRUE ~ 0)
+
+# % of households who have incurred debts in the past 30 days
+r$s5 <- case_when(r$debts == "yes" ~ 1,
+                  TRUE ~ 0)
+  
+
+# % of HHs filing complaints
+r$aap1 <- case_when( r$use_complaint_mechanisms == "yes" ~ 1,
+                   r$use_complaint_mechanisms == "no" ~ 0,
+                   TRUE~ NA_real_)
 # % HHs with access/knowledge of complaint mechanisms 
-aap <- case_when(r$complaint_mechanisms == "yes" ~ 1,
+r$aap <- case_when(r$complaint_mechanisms == "yes" ~ 1,
                  r$complaint_mechanisms == "no" ~ 0,
                  TRUE~ NA_real_)
+# % of households reporting time to receive response to complaints
+r$aap2_i <- case_when(r$time_resolve_complaint == "less_than_two" ~ 1,
+                    is.na(r$time_resolve_complaint) ~ NA_real_,
+                    TRUE ~ 0)
+r$aap2_ii <- case_when(r$time_resolve_complaint == "less_than_two" ~ 1,
+                    is.na(r$time_resolve_complaint) ~ NA_real_,
+                    TRUE ~ 0)
+r$aap2_iii <- case_when(r$time_resolve_complaint == "three_weeks_or_more" ~ 1,
+                    is.na(r$time_resolve_complaint) ~ NA_real_,
+                    TRUE ~ 0)
+r$aap2_iv <- case_when(r$time_resolve_complaint == "less_than_a_week" ~ 1,
+                    is.na(r$time_resolve_complaint) ~ NA_real_,
+                    TRUE ~ 0)
+r$aap2_v <- case_when(r$time_resolve_complaint == "not_addressed" ~ 1,
+                    is.na(r$time_resolve_complaint) ~ NA_real_,
+                    TRUE ~ 0)
+# % of HHs reporting satisfaction with resolution of complaints
+r$aap3_satisfied <- case_when(r$satisfaction_complaint %in% c("satisfied","very_satisfied") ~ 1,
+                    is.na(r$satisfaction_complaint) ~ NA_real_,
+                    TRUE ~ 0)
+r$aap3_constant <- case_when(r$satisfaction_complaint == "neither_satisfied" ~ 1,
+                            is.na(r$satisfaction_complaint) ~ NA_real_,
+                            TRUE ~ 0)
+r$aap3_dissatisfied <- case_when(r$satisfaction_complaint %in% c("dissatisfied","very_dissatisfied") ~ 1,
+                            is.na(r$satisfaction_complaint) ~ NA_real_,
+                            TRUE ~ 0)
+
 return(r)
 }

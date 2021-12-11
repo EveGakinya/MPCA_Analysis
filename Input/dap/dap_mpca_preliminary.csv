@@ -11,11 +11,18 @@ HH Profile,% of household by gender:males,% of household by gender:males,,,,per_
 HH Profile,% of households by age groups:children,% of households by age groups:children,,,,per_children,numerical,direct_reporting
 HH Profile, % of household by age groups: adults, % of household by age groups: adults,,,,per_adults,numerical,direct_reporting
 HH Profile,% of households with at least one member pregnant or lactating,% of households with at least one member pregnant or lactating,,strata,categorical,hh5,numerical,direct_reporting
-HH Profile,% of households with at least one member with a chronic disease,% of households with at least one member with a chronic disease,,strata,categorical,pwd,categorical,direct_reporting
-HH Profile,% of households reporting being displaced as a result of the May Escalation,% of households reporting being displaced as a result of the May Escalation,,,,displaced_escalation,categorical,direct_reporting
-HH Profile,% of households by primary shelter type reported in the 12 months prior to data collection,% of households by primary shelter type reported in the 12 months prior to data collection,,,,shelter_type,categorical,direct_reporting
-HH Profile,% of households by primary shelter type reported in the 12 months prior to data collection,% of households by primary shelter type reported in the 12 months prior to data collection,,,,occupancy_arrangement,categorical,direct_reporting
-HH Profile,% of households reporting fear of eviction,% of households reporting fear of eviction,,,,hh6,numerical,direct_reporting
+HH Profile,% of households with at least one member with a chronic disease,% of households with at least one member with a chronic disease,,strata,categorical,pwd,numerical,direct_reporting
+HH Profile,% of households reporting being displaced as a result of the May Escalation,% of households reporting being displaced as a result of the May Escalation,,,,displaced_escalation,numerical,direct_reporting
+HH Profile,% of households by primary shelter type reported in the 12 months prior to data collection,Solid / finished apartment,,,,hh6_i,numerical,direct_reporting
+HH Profile,% of households by primary shelter type reported in the 12 months prior to data collection,Solid / finished house,,,,hh6_ii,numerical,direct_reporting
+HH Profile,% of households by primary shelter type reported in the 12 months prior to data collection,Unfinished / non-enclosed building,,,,hh6_iii,numerical,direct_reporting
+HH Profile,% of households by primary shelter type reported in the 12 months prior to data collection,Makeshift shelter,,,,hh6_iv,numerical,direct_reporting
+HH Profile,% of households by primary shelter type reported in the 12 months prior to data collection,Collective shelter,,,,hh6_v,numerical,direct_reporting
+HH Profile,% of households by primary shelter type reported in the 12 months prior to data collection,Rented,,,,hh7_i,numerical,direct_reporting
+HH Profile,% of households by primary shelter type reported in the 12 months prior to data collection,Ownership,,,,hh7_ii,numerical,direct_reporting
+HH Profile,% of households by primary shelter type reported in the 12 months prior to data collection,"Hosted without rent (by family, friends, institution)",,,,hh7_iii,numerical,direct_reporting
+HH Profile,% of households by primary shelter type reported in the 12 months prior to data collection,No occupancy agreement / squatting,,,,hh7_iv,numerical,direct_reporting
+HH Profile,% of households reporting fear of eviction,% of households reporting fear of eviction,,,,hh8,numerical,direct_reporting
 HH Profile,% of households by primary reason fearing eviction,% of households by primary reason fearing eviction.lack_funds,,,,fear_eviction_why.lack_funds,numerical,direct_reporting
 HH Profile,% of households by primary reason fearing eviction,% of households by primary reason fearing eviction.no_longer_hosted,,,,fear_eviction_why.no_longer_hosted,numerical,direct_reporting
 HH Profile,% of households by primary reason fearing eviction,% of households by primary reason fearing eviction.unaccepted_by_community,,,,fear_eviction_why.unaccepted_by_community,numerical,direct_reporting
@@ -24,8 +31,15 @@ HH Profile,% of households by primary reason fearing eviction,% of households by
 HH Profile,% of households by primary reason fearing eviction,% of households by primary reason fearing eviction.no_agreement,,,,fear_eviction_why.no_agreement,numerical,direct_reporting
 HH Profile,% of households by primary reason fearing eviction,% of households by primary reason fearing eviction.inadequate,,,,fear_eviction_why.inadequate,numerical,direct_reporting
 HH Profile,% of households by primary reason fearing eviction,% of households by primary reason fearing eviction.dispute,,,,fear_eviction_why.dispute,numerical,direct_reporting
-HH Profile,% of HHs receiving other kinds of assistance,% of HHs receiving other kinds of assistance,,,,receive_other_assistance,categorical,direct_reporting
-HH Profile,Type of other assistance received,Type of other assistance received,,,,receive_other_assistance_which,categorical,direct_reporting
+HH Profile,% of HHs receiving other kinds of assistance,% of HHs receiving other kinds of assistance,,,,hh9,numerical,direct_reporting
+HH Profile,Type of other assistance received,In-kind assistance (food) - UNRWA,,,,food_unrwa,numerical,direct_reporting
+HH Profile,Type of other assistance received,Cash or voucher assistance - UNRWA,,,,cva_unrwa,numerical,direct_reporting
+HH Profile,Type of other assistance received,Cash assistance - Qatar,,,,cash_qatar,numerical,direct_reporting
+HH Profile,Type of other assistance received,In-kind assistance (food) - INGO,,,,food_ingo,numerical,direct_reporting
+HH Profile,Type of other assistance received,In-kind assistance (food) - WFP,,,,food_wfp,numerical,direct_reporting
+HH Profile,Type of other assistance received,Cash or voucher assistance - CBO or local NGO,,,,cva_cbo,numerical,direct_reporting
+HH Profile,Type of other assistance received,Cash or voucher assistance - WFP,,,,cva_wfp,numerical,direct_reporting
+HH Profile,Type of other assistance received,Cash or voucher assistance - Government agency (e.g. MoSD),,,,cva_gov,numerical,direct_reporting
 Transfer Amount and Size,% of HHs reporting that transfer amount has met their basic needs,% of HHs reporting that transfer amount has met their cash needs,,,,amm1_i,numerical,direct_reporting
 Transfer Amount and Size,% of HHs reporting that transfer amount has met their basic needs,% of HHs reporting that transfer amount has met their food needs,,,,amm1_ii,numerical,direct_reporting
 Transfer Amount and Size,% of HHs reporting that transfer amount has met their basic needs,% of HHs reporting that transfer amount has met their shelter needs,,,,amm1_iii,numerical,direct_reporting
@@ -39,17 +53,89 @@ Transfer Amount and Size,% of HHs reporting that transfer amount has met their b
 Transfer Amount and Size,% of HHs reporting that transfer amount has met their basic needs,% of HHs reporting that transfer amount has met their communication needs,,,,amm1_xi,numerical,direct_reporting
 Transfer Amount and Size,% of HHs reporting that transfer amount has met their basic needs,% of HHs reporting that transfer amount has met their debt needs,,,,amm1_xii,numerical,direct_reporting
 Transfer Amount and Size,% of HHs reporting primary barriers to meeting needs,% of HHs reporting primary barriers to their cash needs,,,,amm2_i,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to meeting  cash needs by type of barrier,Insufficient money to purchase goods or services,,,,cash_barriers.insufficient_money,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to meeting  cash needs by type of barrier,Distance / need to travel makes it difficult to access markets/service providers,,,,cash_barriers.distance,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to meeting  cash needs by type of barrier,Security situation makes it difficult to access markets/service providers,,,,cash_barriers.security_situation,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to meeting  cash needs by type of barrier,Social discrimination makes it difficult to access markets/service providers,,,,cash_barriers.social_discrimination,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to meeting  cash needs by type of barrier,Insufficient amount of goods/services available,,,,cash_barriers.insufficient_goods,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to meeting  cash needs by type of barrier,Poor quality goods/services available Insufficient skills of service providers,,,,cash_barriers.poor_quality,numerical,direct_reporting
 Transfer Amount and Size,% of HHs reporting primary barriers to meeting needs,% of HHs reporting primary barriers to their food needs,,,,amm2_ii,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to their food needs by type of barriers,Insufficient money to purchase goods or services,,,,food_barriers.insufficient_money,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to their food needs by type of barriers,Distance / need to travel makes it difficult to access markets/service providers,,,,food_barriers.distance,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to their food needs by type of barriers,Security situation makes it difficult to access markets/service providers,,,,food_barriers.security_situation,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to their food needs by type of barriers,Social discrimination makes it difficult to access markets/service providers,,,,food_barriers.social_discrimination,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to their food needs by type of barriers,Insufficient amount of goods/services available,,,,food_barriers.insufficient_goods,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to their food needs by type of barriers,Poor quality goods/services available Insufficient skills of service providers,,,,food_barriers.poor_quality,numerical,direct_reporting
 Transfer Amount and Size,% of HHs reporting primary barriers to meeting needs,% of HHs reporting primary barriers to their shelter needs,,,,amm2_iii,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to their shelter needs by type of barrier,Insufficient money to purchase goods or services,,,,shelter_barriers,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to their shelter needs by type of barrier,Distance / need to travel makes it difficult to access markets/service providers,,,,shelter_barriers.insufficient_money,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to their shelter needs by type of barrier,Security situation makes it difficult to access markets/service providers,,,,shelter_barriers.distance,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to their shelter needs by type of barrier,Social discrimination makes it difficult to access markets/service providers,,,,shelter_barriers.security_situation,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to their shelter needs by type of barrier,Insufficient amount of goods/services available,,,,shelter_barriers.social_discrimination,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to their shelter needs by type of barrier,Poor quality goods/services available Insufficient skills of service providers,,,,shelter_barriers.insufficient_goods,numerical,direct_reporting
 Transfer Amount and Size,% of HHs reporting primary barriers to meeting needs,% of HHs reporting primary barriers to their water needs,,,,amm2_iv,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to meeting needs,Insufficient money to purchase goods or services,,,,water_barriers,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to meeting needs,Distance / need to travel makes it difficult to access markets/service providers,,,,water_barriers.insufficient_money,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to meeting needs,Security situation makes it difficult to access markets/service providers,,,,water_barriers.distance,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to meeting needs,Social discrimination makes it difficult to access markets/service providers,,,,water_barriers.security_situation,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to meeting needs,Insufficient amount of goods/services available,,,,water_barriers.social_discrimination,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to meeting needs,Poor quality goods/services available Insufficient skills of service providers,,,,water_barriers.insufficient_goods,numerical,direct_reporting
 Transfer Amount and Size,% of HHs reporting primary barriers to meeting needs,% of HHs reporting primary barriers to their hygiene needs,,,,amm2_v,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to their hygiene needs by barrier,Insufficient money to purchase goods or services,,,,hygiene_barriers.insufficient_money,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to their hygiene needs by barrier,Distance / need to travel makes it difficult to access markets/service providers,,,,hygiene_barriers.distance,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to their hygiene needs by barrier,Security situation makes it difficult to access markets/service providers,,,,hygiene_barriers.security_situation,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to their hygiene needs by barrier,Social discrimination makes it difficult to access markets/service providers,,,,hygiene_barriers.social_discrimination,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to their hygiene needs by barrier,Insufficient amount of goods/services available,,,,hygiene_barriers.insufficient_goods,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to their hygiene needs by barrier,Poor quality goods/services available Insufficient skills of service providers,,,,hygiene_barriers.poor_quality,numerical,direct_reporting
 Transfer Amount and Size,% of HHs reporting primary barriers to meeting needs,% of HHs reporting primary barriers to their health needs,,,,amm2_vi,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to their health needs by type of barrier,Insufficient money to purchase goods or services,,,,health_barriers.insufficient_money,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to their health needs by type of barrier,Distance / need to travel makes it difficult to access markets/service providers,,,,health_barriers.distance,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to their health needs by type of barrier,Security situation makes it difficult to access markets/service providers,,,,health_barriers.security_situation,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to their health needs by type of barrier,Social discrimination makes it difficult to access markets/service providers,,,,health_barriers.social_discrimination,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to their health needs by type of barrier,Insufficient amount of goods/services available,,,,health_barriers.insufficient_goods,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to their health needs by type of barrier,Poor quality goods/services available Insufficient skills of service providers,,,,health_barriers.poor_quality,numerical,direct_reporting
 Transfer Amount and Size,% of HHs reporting primary barriers to meeting needs,% of HHs reporting primary barriers to their education needs,,,,amm2_vii,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to their education needs by type of barrier,Insufficient money to purchase goods or services,,,,edu_barriers.insufficient_money,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to their education needs by type of barrier,Distance / need to travel makes it difficult to access markets/service providers,,,,edu_barriers.distance,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to their education needs by type of barrier,Security situation makes it difficult to access markets/service providers,,,,edu_barriers.security_situation,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to their education needs by type of barrier,Social discrimination makes it difficult to access markets/service providers,,,,edu_barriers.social_discrimination,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to their education needs by type of barrier,Insufficient amount of goods/services available,,,,edu_barriers.insufficient_goods,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to their education needs by type of barrier,Poor quality goods/services available Insufficient skills of service providers,,,,edu_barriers.poor_quality,numerical,direct_reporting
 Transfer Amount and Size,% of HHs reporting primary barriers to meeting needs,% of HHs reporting primary barriers to their energy needs,,,,amm2_viii,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to their energy needs by type of barrier,Insufficient money to purchase goods or services,,,,energy_barriers.insufficient_money,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to their energy needs by type of barrier,Distance / need to travel makes it difficult to access markets/service providers,,,,energy_barriers.distance,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to their energy needs by type of barrier,Security situation makes it difficult to access markets/service providers,,,,energy_barriers.security_situation,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to their energy needs by type of barrier,Social discrimination makes it difficult to access markets/service providers,,,,energy_barriers.social_discrimination,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to their energy needs by type of barrier,Insufficient amount of goods/services available,,,,energy_barriers.insufficient_goods,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to their energy needs by type of barrier,Poor quality goods/services available Insufficient skills of service providers,,,,energy_barriers.poor_quality,numerical,direct_reporting
 Transfer Amount and Size,% of HHs reporting primary barriers to meeting needs,% of HHs reporting primary barriers to their transportation needs,,,,amm2_ix,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to their transportation needs by type of barrier,Insufficient money to purchase goods or services,,,,transportation_barriers.insufficient_money,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to their transportation needs by type of barrier,Distance / need to travel makes it difficult to access markets/service providers,,,,transportation_barriers.distance,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to their transportation needs by type of barrier,Security situation makes it difficult to access markets/service providers,,,,transportation_barriers.security_situation,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to their transportation needs by type of barrier,Social discrimination makes it difficult to access markets/service providers,,,,transportation_barriers.social_discrimination,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to their transportation needs by type of barrier,Insufficient amount of goods/services available,,,,transportation_barriers.insufficient_goods,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to their transportation needs by type of barrier,Poor quality goods/services available Insufficient skills of service providers,,,,transportation_barriers.poor_quality,numerical,direct_reporting
 Transfer Amount and Size,% of HHs reporting primary barriers to meeting needs,% of HHs reporting primary barriers to their hh_items needs,,,,amm2_x,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to meeting needs,Insufficient money to purchase goods or services,,,,hh_items_barriers.insufficient_money,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to meeting needs,Distance / need to travel makes it difficult to access markets/service providers,,,,hh_items_barriers.distance,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to meeting needs,Security situation makes it difficult to access markets/service providers,,,,hh_items_barriers.security_situation,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to meeting needs,Social discrimination makes it difficult to access markets/service providers,,,,hh_items_barriers.social_discrimination,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to meeting needs,Insufficient amount of goods/services available,,,,hh_items_barriers.insufficient_goods,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to meeting needs,Poor quality goods/services available Insufficient skills of service providers,,,,hh_items_barriers.poor_quality,numerical,direct_reporting
 Transfer Amount and Size,% of HHs reporting primary barriers to meeting needs,% of HHs reporting primary barriers to their communication needs,,,,amm2_xi,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to their communication needs by type of barrier,Insufficient money to purchase goods or services,,,,comms_barriers.insufficient_money,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to their communication needs by type of barrier,Distance / need to travel makes it difficult to access markets/service providers,,,,comms_barriers.distance,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to their communication needs by type of barrier,Security situation makes it difficult to access markets/service providers,,,,comms_barriers.security_situation,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to their communication needs by type of barrier,Social discrimination makes it difficult to access markets/service providers,,,,comms_barriers.social_discrimination,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to their communication needs by type of barrier,Insufficient amount of goods/services available,,,,comms_barriers.insufficient_goods,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to their communication needs by type of barrier,Poor quality goods/services available Insufficient skills of service providers,,,,comms_barriers.poor_quality,numerical,direct_reporting
 Transfer Amount and Size,% of HHs reporting primary barriers to meeting needs,% of HHs reporting primary barriers to their debt needs,,,,amm2_xii,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to their debt needs by type of barrier,Insufficient money to purchase goods or services,,,,debt_barriers.insufficient_money,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to their debt needs by type of barrier,Distance / need to travel makes it difficult to access markets/service providers,,,,debt_barriers.distance,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to their debt needs by type of barrier,Security situation makes it difficult to access markets/service providers,,,,debt_barriers.security_situation,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to their debt needs by type of barrier,Social discrimination makes it difficult to access markets/service providers,,,,debt_barriers.social_discrimination,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to their debt needs by type of barrier,Insufficient amount of goods/services available,,,,debt_barriers.insufficient_goods,numerical,direct_reporting
+Transfer Amount and Size,% of HHs reporting primary barriers to their debt needs by type of barrier,Poor quality goods/services available Insufficient skills of service providers,,,,debt_barriers.poor_quality,numerical,direct_reporting
 Transfer Amount and Size,% of HHs reporting taking one of the following behaviors or activities during the duration they received MPCA,Pay down household debt in part,,,,amm3_i,numerical,direct_reporting
 Transfer Amount and Size,% of HHs reporting taking one of the following behaviors or activities during the duration they received MPCA,Pay down household debt in full,,,,amm3_ii,numerical,direct_reporting
 Transfer Amount and Size,% of HHs reporting taking one of the following behaviors or activities during the duration they received MPCA,Not take on any new debts,,,,amm3_iii,numerical,direct_reporting
@@ -66,7 +152,6 @@ Transfer Amount and Size,% of HHs attributing the ability to pursue one of the a
 Transfer Amount and Size,% of HHs attributing the ability to pursue one of the above behaviors or activities on account of MPCA,"Repair or replace a significant NFI (e.g. oven, heater, car, refrigerator)",,,,amm4_vii,numerical,direct_reporting
 Transfer Amount and Size,% of HHs attributing the ability to pursue one of the above behaviors or activities on account of MPCA,% of HHs attributing the ability to pursue one of the above behaviors or activities on account of MPCA,,,,amm4,numerical,direct_reporting
 Transfer Timeliness and Accessibility,% of HHs reporting that cash distribution frequency was appropriate enough,% of HHs reporting that cash distribution frequency was appropriate enough,,,,access1,numerical,direct_reporting
-Transfer Timeliness and Accessibility,% of HHs reporting primary reasons frequency of distributions were unaligned with household needs,% of HHs reporting primary reasons frequency of distributions were unaligned with household needs,,,,transfer_misaligned_why,categorical,direct_reporting
 Transfer Timeliness and Accessibility,% of HHs reporting primary reasons frequency of distributions were unaligned with household needs,"Most HH expenses were incurred at a more frequent basis (e.g. weekly, biweekly)",,,,access2_i,numerical,direct_reporting
 Transfer Timeliness and Accessibility,% of HHs reporting primary reasons frequency of distributions were unaligned with household needs,HHs prefer to receive smaller amounts (weekly),,,,access2_ii,numerical,direct_reporting
 Transfer Timeliness and Accessibility,% of HHs reporting primary reasons frequency of distributions were unaligned with household needs,HHs prefer to receive smaller amounts (bi-weekly),,,,access2_iii,numerical,direct_reporting
@@ -83,7 +168,13 @@ Elasticity and Durability During Shocks,% of HHs reporting their top three prior
 Elasticity and Durability During Shocks,% of HHs reporting their top three priorities following the May Escalation,Legal services,,,,escalation_priorities.legal_services,numerical,direct_reporting
 Elasticity and Durability During Shocks,% of HHs reporting that MPCA supported in meeting HH needs following the May Escalation,% of HHs reporting that MPCA supported in meeting HH needs following the May Escalation,,,,shocks2,numerical,direct_reporting
 Elasticity and Durability During Shocks,% of HHs reporting reason why MPCA did not help in meeting HH needs following the May Escalation,% of HHs reporting reason why MPCA did not help in meeting HH needs following the May Escalation,,,,shock3,numerical,direct_reporting
-Elasticity and Durability During Shocks,"% of households reporting experiencing at least one shock during the period they received MPCA, excluding the May Escalation","% of households reporting experiencing at least one shock during the period they received MPCA, excluding the May Escalation",,,,exp_shock,categorical,direct_reporting
+Elasticity and Durability During Shocks,% of HHs reporting reason why MPCA did not help in meeting HH needs following the May Escalation by reason,Value of distribution was insufficient,,,,shock3_i,numerical,direct_reporting
+Elasticity and Durability During Shocks,% of HHs reporting reason why MPCA did not help in meeting HH needs following the May Escalation by reason,Could not access ATM because ATM was out of service,,,,shock3_ii,numerical,direct_reporting
+Elasticity and Durability During Shocks,% of HHs reporting reason why MPCA did not help in meeting HH needs following the May Escalation by reason,Could not access ATM because could not physically travel (e.g. injury or damaged means of transport/infrastructure),,,,shock3_iii,numerical,direct_reporting
+Elasticity and Durability During Shocks,% of HHs reporting reason why MPCA did not help in meeting HH needs following the May Escalation by reason,Could not access ATM because of insecurity,,,,shock3_iv,numerical,direct_reporting
+Elasticity and Durability During Shocks,% of HHs reporting reason why MPCA did not help in meeting HH needs following the May Escalation by reason,Did not receive cash in a sufficiently timely manner,,,,shock3_v,numerical,direct_reporting
+Elasticity and Durability During Shocks,% of HHs reporting reason why MPCA did not help in meeting HH needs following the May Escalation by reason,Cash was not the best modality to meet the need / was not applicable to the need,,,,shock3_vi,numerical,direct_reporting
+Elasticity and Durability During Shocks,"% of households reporting experiencing at least one shock during the period they received MPCA, excluding the May Escalation","% of households reporting experiencing at least one shock during the period they received MPCA, excluding the May Escalation",,,,shock5,numerical,direct_reporting
 Elasticity and Durability During Shocks,% of households by type of shock experienced during the MPCA period,Medical expenses or procedures,,,,type_of_shock.medical_expenses,numerical,direct_reporting
 Elasticity and Durability During Shocks,% of households by type of shock experienced during the MPCA period,Temporary or permanent loss of employment by at least one household member,,,,type_of_shock.loss_of_employment,numerical,direct_reporting
 Elasticity and Durability During Shocks,% of households by type of shock experienced during the MPCA period,Loss of inventory or produce,,,,type_of_shock.loss_of_inventory,numerical,direct_reporting
@@ -93,7 +184,21 @@ Elasticity and Durability During Shocks,% of households by type of shock experie
 Elasticity and Durability During Shocks,% of households by type of shock experienced during the MPCA period,Education expenses,,,,type_of_shock.education_expense,numerical,direct_reporting
 Elasticity and Durability During Shocks,% of households by type of shock experienced during the MPCA period,"Shelter expenses (e.g. rent, rehabilitation)",,,,type_of_shock.shelter_expense,numerical,direct_reporting
 Elasticity and Durability During Shocks,% of households by type of shock experienced during the MPCA period,Debt payment,,,,type_of_shock.debt_repayment,numerical,direct_reporting
+Elasticity and Durability During Shocks,% of household reporting effect of MPCA on ability to withstand shocks,shock of medical expenses,,,,shocks6_i,numerical,direct_reporting
+Elasticity and Durability During Shocks,% of household reporting effect of MPCA on ability to withstand shocks,shock of loss of income,,,,shocks6_ii,numerical,direct_reporting
+Elasticity and Durability During Shocks,% of household reporting effect of MPCA on ability to withstand shocks,shock of arrival of new household members,,,,shocks6_iv,numerical,direct_reporting
+Elasticity and Durability During Shocks,% of household reporting effect of MPCA on ability to withstand shocks,shock of need to repair or replace a household item,,,,shocks6_v,numerical,direct_reporting
+Elasticity and Durability During Shocks,% of household reporting effect of MPCA on ability to withstand shocks,shock of repairing a productive asset,,,,shocks6_vi,numerical,direct_reporting
+Elasticity and Durability During Shocks,% of household reporting effect of MPCA on ability to withstand shocks,shock of education expenses,,,,shocks6_vii,numerical,direct_reporting
+Elasticity and Durability During Shocks,% of household reporting effect of MPCA on ability to withstand shocks,shock of shelter expenses,,,,shocks6_viii,numerical,direct_reporting
+Elasticity and Durability During Shocks,% of household reporting effect of MPCA on ability to withstand shocks,shock of debt payment,,,,shocks6_ix,numerical,direct_reporting
 Elasticity and Durability During Shocks,% of household reporting effect of MPCA on ability to withstand shocks,% of household reporting effect of MPCA on ability to withstand shocks,,,,shocks6,numerical,direct_reporting
+Elasticity and Durability During Shocks,% of households reporting reasons MPCA was ineffective In helping withstand shocks,shock of medical expenses,,,,shock7_i,numerical,direct_reporting
+Elasticity and Durability During Shocks,% of households reporting reasons MPCA was ineffective In helping withstand shocks,shock of need to repair or replace a household item,,,,shock7_v,numerical,direct_reporting
+Elasticity and Durability During Shocks,% of households reporting reasons MPCA was ineffective In helping withstand shocks,shock of repairing a productive asset,,,,shock7_vi,numerical,direct_reporting
+Elasticity and Durability During Shocks,% of households reporting reasons MPCA was ineffective In helping withstand shocks,shock of education expenses,,,,shock7_vii,numerical,direct_reporting
+Elasticity and Durability During Shocks,% of households reporting reasons MPCA was ineffective In helping withstand shocks,shock of shelter expenses,,,,shock7_viii,numerical,direct_reporting
+Elasticity and Durability During Shocks,% of households reporting reasons MPCA was ineffective In helping withstand shocks,shock of debt payment,,,,shock7_xi,numerical,direct_reporting
 Elasticity and Durability During Shocks,% of households reporting reasons MPCA was ineffective In helping withstand shocks,% of households reporting reasons MPCA was ineffective In helping withstand shocks,,,,shocks7,numerical,direct_reporting
 Expenditure and impact,% of HHs by reported income sources,Salary from regular employment (private sector),,,,hh21_i,numerical,direct_reporting
 Expenditure and impact,% of HHs by reported income sources,Salary from regular employment (public sector),,,,hh21_ii,numerical,direct_reporting
@@ -123,19 +228,58 @@ Expenditure and impact,% of HHs by reported expenditures,cultural and recreation
 Expenditure and impact,% of HHs by reported expenditures,personal care ,,,,hh22_xi,numerical,direct_reporting
 Expenditure and impact,% of HHs by reported expenditures,cigarettes and tobacco ,,,,hh22_xii,numerical,direct_reporting
 Expenditure and impact,% of HHs by reported expenditures,"electricity including bells, fuels, repairs",,,,hh22_xiii,numerical,direct_reporting
+Expenditure and impact,Average expenditure,Food,,,,hh23_i,numerical,direct_reporting
+Expenditure and impact,Average expenditure,Clothing and shoes ,,,,hh23_ii,numerical,direct_reporting
+Expenditure and impact,Average expenditure,housing,,,,hh23_iii,numerical,direct_reporting
+Expenditure and impact,Average expenditure,home appliances ,,,,hh23_iv,numerical,direct_reporting
+Expenditure and impact,Average expenditure,Debt repayment,,,,hh23_v,numerical,direct_reporting
+Expenditure and impact,Average expenditure,house needs ,,,,hh23_vi,numerical,direct_reporting
+Expenditure and impact,Average expenditure,health care ,,,,hh23_vii,numerical,direct_reporting
+Expenditure and impact,Average expenditure,transportation,,,,hh23_viii,numerical,direct_reporting
+Expenditure and impact,Average expenditure,communication,,,,hh23_ix,numerical,direct_reporting
+Expenditure and impact,Average expenditure,cultural and recreational activities ,,,,hh23_x,numerical,direct_reporting
+Expenditure and impact,Average expenditure,personal care ,,,,hh23_xi,numerical,direct_reporting
+Expenditure and impact,Average expenditure,cigarettes and tobacco ,,,,hh23_xii,numerical,direct_reporting
+Expenditure and impact,Average expenditure,"electricity including bells, fuels, repairs",,,,hh23_xiii,numerical,direct_reporting
+Expenditure and impact,Average expenditure,total expense,,,,hh24,numerical,direct_reporting
 Expenditure and impact,LCSI,stress,,,,stress,numerical,direct_reporting
 Expenditure and impact,LCSI,crisis,,,,crisis,numerical,direct_reporting
 Expenditure and impact,LCSI,emergency,,,,emergency,numerical,direct_reporting
-Expenditure and impact,% of households reporting how their financial situation compares to before receiving MPCA,% of households reporting how their financial situation compares to before receiving MPCA,,,,impact2,categorical,direct_reporting
+Expenditure and impact,LCSI,selling_hh_properties,,,,hh25_i,numerical,direct_reporting
+Expenditure and impact,LCSI,spent_savings,,,,hh25_ii,numerical,direct_reporting
+Expenditure and impact,LCSI,buying_goods_on_credit,,,,hh25_iii,numerical,direct_reporting
+Expenditure and impact,LCSI,hh_members_ate_eslewhere,,,,hh25_iv,numerical,direct_reporting
+Expenditure and impact,LCSI,selling_productive_assets,,,,hh25_v,numerical,direct_reporting
+Expenditure and impact,LCSI,withdrew_children_from_school,,,,hh25_vi,numerical,direct_reporting
+Expenditure and impact,LCSI,school_drop_out,,,,hh25_vii,numerical,direct_reporting
+Expenditure and impact,LCSI,reduced_health_expenses,,,,hh25_viii,numerical,direct_reporting
+Expenditure and impact,LCSI,engaging_in_risky_behaviour,,,,hh25_ix,numerical,direct_reporting
+Expenditure and impact,LCSI,sold_house_land,,,,hh25_x,numerical,direct_reporting
+Expenditure and impact,LCSI,hh_migrated,,,,hh25_xi,numerical,direct_reporting
+Expenditure and impact,% of households reporting how their financial situation compares to before receiving MPCA,Improved,,,,impact2_improved,numerical,direct_reporting
+Expenditure and impact,% of households reporting how their financial situation compares to before receiving MPCA,Constant,,,,impact2_constant,numerical,direct_reporting
+Expenditure and impact,% of households reporting how their financial situation compares to before receiving MPCA,Worsened,,,,impact2_worsened,numerical,direct_reporting
 Expenditure and impact,% of households attributing their improved financial situation to My Choice ,% of households attributing their improved financial situation to My Choice ,,,,impact3,numerical,direct_reporting
-Expenditure and impact,% of households reporting how the mental state of household members compares to before receiving MPCA,% of households reporting how the mental state of household members compares to before receiving MPCA,,,,impact4,categorical,direct_reporting
+Expenditure and impact,% of households reporting how the mental state of household members compares to before receiving MPCA,Improved,,,,impact4_improved,numerical,direct_reporting
+Expenditure and impact,% of households reporting how the mental state of household members compares to before receiving MPCA,Constant,,,,impact4_constant,numerical,direct_reporting
+Expenditure and impact,% of households reporting how the mental state of household members compares to before receiving MPCA,Worsened,,,,impact4_worsened,numerical,direct_reporting
 Expenditure and impact,% of households attributing their improved mental state to My Choice ,% of households attributing their improved mental state to My Choice ,,,,impact5,numerical,direct_reporting
-Expenditure and impact,% of HHs reporting changes in inter-HH behavior as a result of the MPCA,Joint decision-making (e.g. more than one HH member) on household expenses,,,,impact6_i,categorical,direct_reporting
-Expenditure and impact,% of HHs reporting changes in inter-HH behavior as a result of the MPCA,Joint decision-making on whether to take loans,,,,impact6_ii,categorical,direct_reporting
-Expenditure and impact,% of HHs reporting changes in inter-HH behavior as a result of the MPCA,"Joint decision-making on responsibilities of household members (e.g. work, care of the elderly)",,,,impact6_iii,categorical,direct_reporting
-Expenditure and impact,% of HHs reporting changes in inter-HH behavior as a result of the MPCA,Disputes within household on how to spend money,,,,impact6_iv,categorical,direct_reporting
-Expenditure and impact,% of HHs reporting changes in inter-HH behavior as a result of the MPCA,Disputes with creditors,,,,impact6_v,categorical,direct_reporting
-Expenditure and impact,% of households reporting an increase in household member dignity as a result of My Choice,% of households reporting an increase in household member dignity as a result of My Choice,,,,change_dignity_mpca,categorical,direct_reporting
+Expenditure and impact,Joint decision-making (e.g. more than one HH member) on household expenses,Increased,,,,p6_i_increased,numerical,direct_reporting
+Expenditure and impact,Joint decision-making (e.g. more than one HH member) on household expenses,Constant,,,,p6_i_constant,numerical,direct_reporting
+Expenditure and impact,Joint decision-making (e.g. more than one HH member) on household expenses,Decreased,,,,p6_i_decreased,numerical,direct_reporting
+Expenditure and impact,Joint decision-making on whether to take loans,Increased,,,,p6_ii_increased,numerical,direct_reporting
+Expenditure and impact,Joint decision-making on whether to take loans,Constant,,,,p6_ii_constant,numerical,direct_reporting
+Expenditure and impact,Joint decision-making on whether to take loans,Decreased,,,,p6_ii_decreased,numerical,direct_reporting
+Expenditure and impact,"Joint decision-making on responsibilities of household members (e.g. work, care of the elderly)",Increased,,,,p6_iii_increased,numerical,direct_reporting
+Expenditure and impact,"Joint decision-making on responsibilities of household members (e.g. work, care of the elderly)",Constant,,,,p6_iii_constant,numerical,direct_reporting
+Expenditure and impact,"Joint decision-making on responsibilities of household members (e.g. work, care of the elderly)",Decreased,,,,p6_iii_decreased,numerical,direct_reporting
+Expenditure and impact,Disputes within household on how to spend money,Increased,,,,p6_iv_increased,numerical,direct_reporting
+Expenditure and impact,Disputes within household on how to spend money,Constant,,,,p6_iv_constant,numerical,direct_reporting
+Expenditure and impact,Disputes within household on how to spend money,Decreased,,,,p6_iv_decreased,numerical,direct_reporting
+Expenditure and impact,Disputes with creditors,Increased,,,,p6_v_increased,numerical,direct_reporting
+Expenditure and impact,Disputes with creditors,Constant,,,,p6_v_constant,numerical,direct_reporting
+Expenditure and impact,Disputes with creditors,Decreased,,,,p6_v_decreased,numerical,direct_reporting
+Expenditure and impact,% of households reporting an increase in household member dignity as a result of My Choice,% of households reporting an increase in household member dignity as a result of My Choice,,,,impact7,numerical,direct_reporting
 Expenditure and impact,% of households reporting the manner in which household members' dignity has changed as a result of My Choice,Feel more empowered to provide for household,,,,change_dignity_mpca_how.empowered,numerical,direct_reporting
 Expenditure and impact,% of households reporting the manner in which household members' dignity has changed as a result of My Choice,Less reliance on others for food and non-food items,,,,change_dignity_mpca_how.less_reliance,numerical,direct_reporting
 Expenditure and impact,% of households reporting the manner in which household members' dignity has changed as a result of My Choice,Able to participate more easily in daily activities such as going to the market,,,,change_dignity_mpca_how.participate_easily,numerical,direct_reporting
@@ -143,17 +287,21 @@ Expenditure and impact,% of households reporting the manner in which household m
 Expenditure and impact,% of households reporting the manner in which household members' dignity has changed as a result of My Choice,Increased feeling of self-worth,,,,change_dignity_mpca_how.self_worth,numerical,direct_reporting
 Expenditure and impact,% of households reporting the manner in which household members' dignity has changed as a result of My Choice,Increased feeling of respect from others,,,,change_dignity_mpca_how.respect_from_others,numerical,direct_reporting
 Expenditure and impact,% of households reporting the manner in which household members' dignity has changed as a result of My Choice,Increased feeling of self-confidence,,,,change_dignity_mpca_how.self_confidence,numerical,direct_reporting
-Satisfaction and Unforeseen Challenges,% of households reporting changes with relatives as a result of receiving MPCA through My Choice,% of households reporting changes with relatives as a result of receiving MPCA through My Choice,,,,sat1,categorical,direct_reporting
+Satisfaction and Unforeseen Challenges,% of households reporting changes with relatives as a result of receiving MPCA through My Choice,Improved,,,,s1_improved,numerical,direct_reporting
+Satisfaction and Unforeseen Challenges,% of households reporting changes with relatives as a result of receiving MPCA through My Choice,Constant,,,,s1_constant,numerical,direct_reporting
+Satisfaction and Unforeseen Challenges,% of households reporting changes with relatives as a result of receiving MPCA through My Choice,Worsened,,,,s1_worsened,numerical,direct_reporting
 Satisfaction and Unforeseen Challenges,% of households reporting reasons relations with relatives have worsened by reason,Resentment that our household receives more assistance,,,,worse_relations_relatives_why.resentment,numerical,direct_reporting
 Satisfaction and Unforeseen Challenges,% of households reporting reasons relations with relatives have worsened by reason,Anger over household's refusal to provide them with support or loan,,,,worse_relations_relatives_why.anger,numerical,direct_reporting
 Satisfaction and Unforeseen Challenges,% of households reporting reasons relations with relatives have worsened by reason,Condescending attitude towards those who receive assistance,,,,worse_relations_relatives_why.condescending_attitude,numerical,direct_reporting
 Satisfaction and Unforeseen Challenges,% of households reporting reasons relations with relatives have worsened by reason,Rumors about character of assistance or those who receive it,,,,worse_relations_relatives_why.rumors,numerical,direct_reporting
-Satisfaction and Unforeseen Challenges,% of households reporting changes with other households or community members since receiving MPCA through My Choice,% of households reporting changes with other households or community members since receiving MPCA through My Choice,,,,sat3,categorical,direct_reporting
+Satisfaction and Unforeseen Challenges,% of households reporting changes with other households or community members since receiving MPCA through My Choice,Improved,,,,s3_improved,numerical,direct_reporting
+Satisfaction and Unforeseen Challenges,% of households reporting changes with other households or community members since receiving MPCA through My Choice,Constant,,,,s3_constant,numerical,direct_reporting
+Satisfaction and Unforeseen Challenges,% of households reporting changes with other households or community members since receiving MPCA through My Choice,Worsened,,,,s3_worsened,numerical,direct_reporting
 Satisfaction and Unforeseen Challenges,% of households reporting reasons relations with other households or community members have worsened by reason,Resentment that our household receives more assistance,,,,worse_relations_community_why.resentment,numerical,direct_reporting
 Satisfaction and Unforeseen Challenges,% of households reporting reasons relations with other households or community members have worsened by reason,Anger over household's refusal to provide them with support or loan,,,,worse_relations_community_why.anger,numerical,direct_reporting
 Satisfaction and Unforeseen Challenges,% of households reporting reasons relations with other households or community members have worsened by reason,Condescending attitude towards those who receive assistance,,,,worse_relations_community_why.condescending_attitude,numerical,direct_reporting
 Satisfaction and Unforeseen Challenges,% of households reporting reasons relations with other households or community members have worsened by reason,Rumors about character of assistance or those who receive it,,,,worse_relations_community_why.rumors,numerical,direct_reporting
-Satisfaction and Unforeseen Challenges,% of households who have incurred debts in the past 30 days,% of households who have incurred debts in the past 30 days,,,,debts,categorical,direct_reporting
+Satisfaction and Unforeseen Challenges,% of households who have incurred debts in the past 30 days,% of households who have incurred debts in the past 30 days,,,,s5,numerical,direct_reporting
 Satisfaction and Unforeseen Challenges,% of households by source of incurred debt,Bank or financial institution,,,,source_debts.bank,numerical,direct_reporting
 Satisfaction and Unforeseen Challenges,% of households by source of incurred debt,Microlender,,,,source_debts.microlender,numerical,direct_reporting
 Satisfaction and Unforeseen Challenges,% of households by source of incurred debt,Savings and credit cooperative,,,,source_debts.savings,numerical,direct_reporting
@@ -173,9 +321,15 @@ Satisfaction and Unforeseen Challenges,% of households by purpose debt was incur
 Satisfaction and Unforeseen Challenges,% of households by purpose debt was incurred,Repay existing debts,,,,debt_purpose.repayment_of_debt,numerical,direct_reporting
 Satisfaction and Unforeseen Challenges,% of households by purpose debt was incurred,Weddings / marriages,,,,debt_purpose.weddings_marriages,numerical,direct_reporting
 "Accountability, Responsiveness, and Complaint Response Mechanism(s)",% HHs with access/knowledge of complaint mechanisms ,% HHs with access/knowledge of complaint mechanisms ,,,,aap,numerical,direct_reporting
-"Accountability, Responsiveness, and Complaint Response Mechanism(s)",% of HHs filing complaints,% of HHs filing complaints,,,,use_complaint_mechanisms,categorical,direct_reporting
-"Accountability, Responsiveness, and Complaint Response Mechanism(s)",% of households reporting time to receive response to complaints,% of households reporting time to receive response to complaints,,,,time_resolve_complaint,categorical,direct_reporting
-"Accountability, Responsiveness, and Complaint Response Mechanism(s)",% of HHs reporting satisfaction with resolution of complaints,% of HHs reporting satisfaction with resolution of complaints,,,,satisfaction_complaint,categorical,direct_reporting
+"Accountability, Responsiveness, and Complaint Response Mechanism(s)",% of HHs filing complaints,% of HHs filing complaints,,,,aap1,numerical,direct_reporting
+"Accountability, Responsiveness, and Complaint Response Mechanism(s)",% of households reporting time to receive response to complaints,Less than a week,,,,aap2_i,numerical,direct_reporting
+"Accountability, Responsiveness, and Complaint Response Mechanism(s)",% of households reporting time to receive response to complaints,One week,,,,aap2_ii,numerical,direct_reporting
+"Accountability, Responsiveness, and Complaint Response Mechanism(s)",% of households reporting time to receive response to complaints,Two weeks,,,,aap2_iii,numerical,direct_reporting
+"Accountability, Responsiveness, and Complaint Response Mechanism(s)",% of households reporting time to receive response to complaints,Three weeks or more,,,,aap2_iv,numerical,direct_reporting
+"Accountability, Responsiveness, and Complaint Response Mechanism(s)",% of households reporting time to receive response to complaints,My complaint was not addressed,,,,aap2_v,numerical,direct_reporting
+"Accountability, Responsiveness, and Complaint Response Mechanism(s)",% of HHs reporting satisfaction with resolution of complaints,satisfied,,,,aap3_satisfied,numerical,direct_reporting
+"Accountability, Responsiveness, and Complaint Response Mechanism(s)",% of HHs reporting satisfaction with resolution of complaints,constant,,,,aap3_constant,numerical,direct_reporting
+"Accountability, Responsiveness, and Complaint Response Mechanism(s)",% of HHs reporting satisfaction with resolution of complaints,dissatisfied,,,,aap3_dissatisfied,numerical,direct_reporting
 "Accountability, Responsiveness, and Complaint Response Mechanism(s)",% of households by reason for dissatisfaction,Response was inadequate or insufficient,,,,reason_dissatisfaction_complaint.response_inadequate,numerical,direct_reporting
 "Accountability, Responsiveness, and Complaint Response Mechanism(s)",% of households by reason for dissatisfaction,Response was not aligned with the complaint I filed,,,,reason_dissatisfaction_complaint.response_not_aligned,numerical,direct_reporting
 "Accountability, Responsiveness, and Complaint Response Mechanism(s)",% of households by reason for dissatisfaction,Response took too long to be delivered,,,,reason_dissatisfaction_complaint.response_took_long,numerical,direct_reporting
