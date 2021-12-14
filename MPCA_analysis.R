@@ -45,10 +45,8 @@ analysisplan$independent.variable <-  "refugee_status"
 analysisplan$independent.variable.type <- "categorical"
 
 
-#AGGREGATE ACROSS DISTRICTS OR/AND POPULATION GROUPS
+#AGGREGATE 
 analysisplan <- analysisplan_nationwide(analysisplan)
-#analysisplan <- analysisplan_pop_group_aggregated(analysisplan)
-#analysisplan$hypothesis.type <- "group_difference"
 
 
 result <- from_analysisplan_map_to_output(response_with_composites, analysisplan = analysisplan,
