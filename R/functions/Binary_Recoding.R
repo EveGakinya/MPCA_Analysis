@@ -34,6 +34,14 @@ r$hh2_ii <- case_when( (r$hhh == "yes" & r$gender_respondent_r == "male") | r$se
 ##average household size
 r$average_hh_size <- round(mean(r$hh_size, na.rm = TRUE),0)
 
+df_new <-r %>%  select(refugee_status, hh_size) %>% 
+  filter(refugee_status == "refugee") %>% 
+  summarise(Average_food = round(mean(hh_size, na.rm = T), 0)) 
+
+df_new <-r %>%  select(refugee_status, hh_size) %>% 
+  filter(refugee_status == "non_refugee") %>% 
+  summarise(Average_food = round(mean(hh_size, na.rm = T), 0))
+
 ##% of household by gender:females
 
 r$per_female <- round((r$tot_female/r$hh_size)*100,0)
@@ -117,6 +125,7 @@ r$cash_qatar <- case_when(r$receive_other_assistance_which == "cash_qatar" ~ 1,
 r$food_ingo <- case_when(r$receive_other_assistance_which == "food_ingo" ~ 1,
                         is.na(r$receive_other_assistance_which) ~ NA_real_,
                         TRUE ~ 0)
+
 
 r$food_wfp <- case_when(r$receive_other_assistance_which == "food_wfp" ~ 1,
                        is.na(r$receive_other_assistance_which) ~ NA_real_,
@@ -603,45 +612,218 @@ r$hh22_xiii <- case_when(r$electricity_exp > 0 ~ 1,
 
 ###Average income
 # Food
-r$hh23_i <- round(mean(r$food_exp, na.rm = TRUE),0)
+# r$hh23_i <- round(mean(r$food_exp, na.rm = TRUE),0)
+r$food_share <- round((as.numeric(r$food_exp)/ as.numeric(r$total_exp))*100, 0)
+r$hh23_i <- ifelse(r$food_share > 100, NA, 
+                 r$food_share)
+# df_new <-r %>%  select(refugee_status, food_exp) %>% 
+#   filter(refugee_status == "refugee") %>% 
+#   summarise(Average_food = round(mean(food_exp, na.rm = T), 0)) 
+# 
+# df_new <-r %>%  select(refugee_status, food_exp) %>% 
+#   filter(refugee_status == "non_refugee") %>% 
+#   summarise(Average_food = round(mean(food_exp, na.rm = T), 0))
 
 # Clothing and shoes 
-r$hh23_ii <- round(mean(r$clothing_exp, na.rm = TRUE),0)
+# r$hh23_ii <- round(mean(r$clothing_exp, na.rm = TRUE),0)
+
+r$clothing_share <- round((as.numeric(r$clothing_exp)/ as.numeric(r$total_exp))*100, 0)
+r$hh23_ii <- ifelse(r$clothing_share > 100, NA, 
+                    r$clothing_share)
+# df_new <-r %>%  select(refugee_status, clothing_exp) %>% 
+#   filter(refugee_status == "refugee") %>% 
+#   summarise(Average_food = round(mean(clothing_exp, na.rm = T), 0)) 
+# 
+# df_new <-r %>%  select(refugee_status, clothing_exp) %>% 
+#   filter(refugee_status == "non_refugee") %>% 
+#   summarise(Average_food = round(mean(clothing_exp, na.rm = T), 0))
 
 # housing
-r$hh23_iii <- round(mean(r$housing_exp, na.rm = TRUE),0)
+# r$hh23_iii <- round(mean(r$housing_exp, na.rm = TRUE),0)
+
+r$housing_share <- round((as.numeric(r$housing_exp)/ as.numeric(r$total_exp))*100, 0)
+r$hh23_iii <- ifelse(r$housing_share > 100, NA, 
+                    r$housing_share)
+
+# df_new <-r %>%  select(refugee_status, debt_repayment) %>% 
+#   filter(refugee_status == "refugee") %>% 
+#   summarise(Average_food = round(mean(debt_repayment, na.rm = T), 0)) 
+# 
+# df_new <-r %>%  select(refugee_status, debt_repayment) %>% 
+#   filter(refugee_status == "non_refugee") %>% 
+#   summarise(Average_food = round(mean(debt_repayment, na.rm = T), 0))
+
 
 # home appliances 
-r$hh23_iv <- round(mean(r$appliances_exp, na.rm = TRUE),0)
+# r$hh23_iv <- round(mean(r$appliances_exp, na.rm = TRUE),0)
+
+r$appliance_share <- round((as.numeric(r$appliances_exp)/ as.numeric(r$total_exp))*100, 0)
+r$hh23_iv <- ifelse(r$appliance_share > 100, NA, 
+                    r$appliance_share)
+
+
+# df_new <-r %>%  select(refugee_status, debt_repayment) %>% 
+#   filter(refugee_status == "refugee") %>% 
+#   summarise(Average_food = round(mean(debt_repayment, na.rm = T), 0)) 
+# 
+# df_new <-r %>%  select(refugee_status, debt_repayment) %>% 
+#   filter(refugee_status == "non_refugee") %>% 
+#   summarise(Average_food = round(mean(debt_repayment, na.rm = T), 0))
 
 # Debt repayment
-r$hh23_v <- round(mean(r$debt_repayment, na.rm = TRUE),0)
+# r$hh23_v <- round(mean(r$debt_repayment, na.rm = TRUE),0)
 
+r$debt_share <- round((as.numeric(r$debt_repayment)/ as.numeric(r$total_exp))*100, 0)
+r$hh23_v <- ifelse(r$debt_share > 100, NA, 
+                    r$debt_share)
+
+
+# df_new <-r %>%  select(refugee_status, debt_repayment) %>% 
+#   filter(refugee_status == "refugee") %>% 
+#   summarise(Average_food = round(mean(debt_repayment, na.rm = T), 0)) 
+# 
+# df_new <-r %>%  select(refugee_status, debt_repayment) %>% 
+#   filter(refugee_status == "non_refugee") %>% 
+#   summarise(Average_food = round(mean(debt_repayment, na.rm = T), 0))
 # house needs 
-r$hh23_vi <- round(mean(r$house_needs_exp, na.rm = TRUE),0)
+# r$hh23_vi <- round(mean(r$house_needs_exp, na.rm = TRUE),0)
 
+r$needs_share <- round((as.numeric(r$house_needs_exp)/ as.numeric(r$total_exp))*100, 0)
+r$hh23_vi <- ifelse(r$needs_share > 100, NA, 
+                   r$needs_share)
+
+# df_new <-r %>%  select(refugee_status, house_needs_exp) %>% 
+#   filter(refugee_status == "refugee") %>% 
+#   summarise(Average_food = round(mean(house_needs_exp, na.rm = T), 0)) 
+# 
+# df_new <-r %>%  select(refugee_status, house_needs_exp) %>% 
+#   filter(refugee_status == "non_refugee") %>% 
+#   summarise(Average_food = round(mean(house_needs_exp, na.rm = T), 0))
 # health care 
-r$hh23_vii <- round(mean(r$health_exp, na.rm = TRUE),0)
+# r$hh23_vii <- round(mean(r$health_exp, na.rm = TRUE),0)
+
+r$health_share <- round((as.numeric(r$health_exp)/ as.numeric(r$total_exp))*100, 0)
+r$hh23_vii <- ifelse(r$health_share > 100, NA, 
+                    r$health_share)
+
+
+# df_new <-r %>%  select(refugee_status, health_exp) %>% 
+#   filter(refugee_status == "refugee") %>% 
+#   summarise(Average_food = round(mean(health_exp, na.rm = T), 0)) 
+# 
+# df_new <-r %>%  select(refugee_status, health_exp) %>% 
+#   filter(refugee_status == "non_refugee") %>% 
+#   summarise(Average_food = round(mean(health_exp, na.rm = T), 0))
 
 # transportation
-r$hh23_viii <- round(mean(r$transp_exp, na.rm = TRUE),0)
+# r$hh23_viii <- round(mean(r$transp_exp, na.rm = TRUE),0)
+
+r$trans_share <- round((as.numeric(r$transp_exp)/ as.numeric(r$total_exp))*100, 0)
+r$hh23_viii <- ifelse(r$trans_share > 100, NA, 
+                     r$trans_share)
+
+
+# df_new <-r %>%  select(refugee_status, transp_exp) %>% 
+#   filter(refugee_status == "refugee") %>% 
+#   summarise(Average_food = round(mean(transp_exp, na.rm = T), 0)) 
+# 
+# df_new <-r %>%  select(refugee_status, transp_exp) %>% 
+#   filter(refugee_status == "non_refugee") %>% 
+#   summarise(Average_food = round(mean(transp_exp, na.rm = T), 0))
+# 
 
 # communication
-r$hh23_ix <- round(mean(r$communication_exp, na.rm = TRUE),0)
+# r$hh23_ix <- round(mean(r$communication_exp, na.rm = TRUE),0)
+
+r$comms_share <- round((as.numeric(r$communication_exp)/ as.numeric(r$total_exp))*100, 0)
+r$hh23_ix <- ifelse(r$comms_share > 100, NA, 
+                      r$comms_share)
+
+
+
+# df_new <-r %>%  select(refugee_status, communication_exp) %>% 
+#   filter(refugee_status == "refugee") %>% 
+#   summarise(Average_food = round(mean(communication_exp, na.rm = T), 0)) 
+# 
+# df_new <-r %>%  select(refugee_status, communication_exp) %>% 
+#   filter(refugee_status == "non_refugee") %>% 
+#   summarise(Average_food = round(mean(communication_exp, na.rm = T), 0))
+# 
 
 # cultural and recreational activities 
-r$hh23_x <- round(mean(r$recreation_exp, na.rm = TRUE),0)
+# r$hh23_x <- round(mean(r$recreation_exp, na.rm = TRUE),0)
+
+r$recreation_share <- round((as.numeric(r$recreation_exp)/ as.numeric(r$total_exp))*100, 0)
+r$hh23_x <- ifelse(r$recreation_share > 100, NA, 
+                    r$recreation_share)
+
+
+# df_new <-r %>%  select(refugee_status, recreation_exp) %>% 
+#   filter(refugee_status == "refugee") %>% 
+#   summarise(Average_food = round(mean(recreation_exp, na.rm = T), 0)) 
+# 
+# df_new <-r %>%  select(refugee_status, recreation_exp) %>% 
+#   filter(refugee_status == "non_refugee") %>% 
+#   summarise(Average_food = round(mean(recreation_exp, na.rm = T), 0))
+
 
 # personal care 
-r$hh23_xi <- round(mean(r$personal_exp, na.rm = TRUE),0)
+# r$hh23_xi <- round(mean(r$personal_exp, na.rm = TRUE),0)
+
+r$personal_share <- round((as.numeric(r$personal_exp)/ as.numeric(r$total_exp))*100, 0)
+r$hh23_xi <- ifelse(r$personal_share > 100, NA, 
+                   r$personal_share)
+
+# df_new <-r %>%  select(refugee_status, personal_exp) %>% 
+#   filter(refugee_status == "refugee") %>% 
+#   summarise(Average_food = round(mean(personal_exp, na.rm = T), 0)) 
+# 
+# df_new <-r %>%  select(refugee_status, personal_exp) %>% 
+#   filter(refugee_status == "non_refugee") %>% 
+#   summarise(Average_food = round(mean(personal_exp, na.rm = T), 0))
 
 # cigarettes and tobacco
-r$hh23_xii <- round(mean(r$cigarettes_exp, na.rm = TRUE),0)
+# r$hh23_xii <- round(mean(r$cigarettes_exp, na.rm = TRUE),0)
+
+r$cigarettes_share <- round((as.numeric(r$cigarettes_exp)/ as.numeric(r$total_exp))*100, 0)
+r$hh23_xii <- ifelse(r$cigarettes_share > 100, NA, 
+                    r$cigarettes_share)
+
+# df_new <-r %>%  select(refugee_status, cigarettes_exp) %>% 
+#   filter(refugee_status == "refugee") %>% 
+#   summarise(Average_food = round(mean(cigarettes_exp, na.rm = T), 0)) 
+# 
+# df_new <-r %>%  select(refugee_status, cigarettes_exp) %>% 
+#   filter(refugee_status == "non_refugee") %>% 
+#   summarise(Average_food = round(mean(cigarettes_exp, na.rm = T), 0))
+# 
 
 # electricity including bells, fuels, repairs
-r$hh23_xiii <- round(mean(r$electricity_exp, na.rm = TRUE),0)
+# r$hh23_xiii <- round(mean(r$electricity_exp, na.rm = TRUE),0)
+
+r$electricity_share <- round((as.numeric(r$electricity_exp)/ as.numeric(r$total_exp))*100, 0)
+r$hh23_xiii <- ifelse(r$electricity_share > 100, NA, 
+                    r$electricity_share)
+
+# df_new <-r %>%  select(refugee_status, electricity_exp) %>% 
+#   filter(refugee_status == "refugee") %>% 
+#   summarise(Average_food = round(mean(electricity_exp, na.rm = T), 0)) 
+# 
+# df_new <-r %>%  select(refugee_status, electricity_exp) %>% 
+#   filter(refugee_status == "non_refugee") %>% 
+#   summarise(Average_food = round(mean(electricity_exp, na.rm = T), 0))
+
 
 r$hh24 <- round(mean(r$total_exp, na.rm = TRUE),0)
+
+
+# df_new <-r %>%  select(refugee_status, total_exp) %>% 
+#   filter(refugee_status == "refugee") %>% 
+#   summarise(Average_food = round(mean(total_exp, na.rm = T), 0)) 
+# 
+# df_new <-r %>%  select(refugee_status, total_exp) %>% 
+#   filter(refugee_status == "non_refugee") %>% 
+#   summarise(Average_food = round(mean(total_exp, na.rm = T), 0))
 
 ##% HH relying on stress / crisis / emergency strategies to cope with a lack of food or money to buy it
 r$stress <-
@@ -703,9 +885,12 @@ r$hh25_ix <- case_when(r$engaging_in_risky_behaviour %in% c("no_already_did", "y
 r$hh25_x <- case_when(r$sold_house_land %in% c("no_already_did", "yes") ~ 1,
                       r$sold_house_land %in% c("not_applicable", "no_no_one_in_HH") ~ 0,
                       TRUE ~ NA_real_)
-r$hh25_xi <- case_when(r$hh_migrated %in% c("no_already_did", "yes") ~ 1,
+
+r$hh25_xi <- case_when(r$hh_migrated %in% c("no_already_did","yes") ~ 1,
                       r$hh_migrated %in% c("not_applicable", "no_no_one_in_HH") ~ 0,
                       TRUE ~ NA_real_)
+
+
 # % of households reporting how their financial situation compares to before receiving MPCA
 
 r$impact2_improved <- case_when(r$change_financial_situation %in% c("improved_significantly","improved_somewhat")~ 1,
@@ -894,3 +1079,4 @@ r$aap3_dissatisfied <- case_when(r$satisfaction_complaint %in% c("dissatisfied",
 
 return(r)
 }
+
