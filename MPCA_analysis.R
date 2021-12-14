@@ -55,7 +55,7 @@ result <- from_analysisplan_map_to_output(response_with_composites, analysisplan
                                           questionnaire = questionnaire, confidence_level = 0.95)
 
 
-name <- "oPt_mpca_finding_refugee_disagg_with_share"
+name <- "oPt_mpca_finding_refugee_disagg_finalized_1"
 saveRDS(result,paste(sprintf("output/RDS/result_%s.RDS", name)))
 
 
