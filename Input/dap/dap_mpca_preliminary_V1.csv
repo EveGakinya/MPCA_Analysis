@@ -235,6 +235,9 @@ Expenditure and impact,Average expenditure,personal care ,,,,hh23_xi,numerical,d
 Expenditure and impact,Average expenditure,cigarettes and tobacco ,,,,hh23_xii,numerical,direct_reporting
 Expenditure and impact,Average expenditure,"electricity including bells, fuels, repairs",,,,hh23_xiii,numerical,direct_reporting
 Expenditure and impact,Average expenditure,total expense,,,,hh24,numerical,direct_reporting
+Expenditure and impact,LCSI,stress,,,,stress,numerical,direct_reporting
+Expenditure and impact,LCSI,crisis,,,,crisis,numerical,direct_reporting
+Expenditure and impact,LCSI,emergency,,,,emergency,numerical,direct_reporting
 Expenditure and impact,LCSI,selling_hh_properties,,,,hh25_i,numerical,direct_reporting
 Expenditure and impact,LCSI,spent_savings,,,,hh25_ii,numerical,direct_reporting
 Expenditure and impact,LCSI,buying_goods_on_credit,,,,hh25_iii,numerical,direct_reporting

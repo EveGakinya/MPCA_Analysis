@@ -1,17 +1,9 @@
 library(readr)
 library(tidyverse)
-r <-read_csv("Input/datasets/cleaned/mpca_data_clean.csv")
+
 recoding_preliminary <- function(r) {
   
   r=response
-
-
-rename_variables <- function(df){
-  names(df) <- c(gsub("/",".",names(df)))
-  return(df)
-}
- r <-rename_variables(r)
-
 
 # % of interviews conducted with head of household
 r$hh1 <- case_when(r$hhh == "yes" ~ 1, TRUE ~ 0)
@@ -34,13 +26,6 @@ r$hh2_ii <- case_when( (r$hhh == "yes" & r$gender_respondent_r == "male") | r$se
 ##average household size
 r$average_hh_size <- round(mean(r$hh_size, na.rm = TRUE),0)
 
-df_new <-r %>%  select(refugee_status, hh_size) %>% 
-  filter(refugee_status == "refugee") %>% 
-  summarise(Average_food = round(mean(hh_size, na.rm = T), 0)) 
-
-df_new <-r %>%  select(refugee_status, hh_size) %>% 
-  filter(refugee_status == "non_refugee") %>% 
-  summarise(Average_food = round(mean(hh_size, na.rm = T), 0))
 
 ##% of household by gender:females
 
@@ -194,57 +179,83 @@ r$amm1_xii <- case_when(r$debt %in% c("mostly_able","fully_able")~1,
 
 # % of HHs reporting primary barriers to their cash needs
 r$amm2_i <- case_when(r$cash_barriers.insufficient_money == 1 | r$cash_barriers.distance == 1 | r$cash_barriers.security_situation == 1 |
-                      r$cash_barriers.social_discrimination == 1 | r$cash_barriers.insufficient_goods == 1 | r$cash_barriers.poor_quality == 1 ~ 1,
-                      TRUE ~ 0)
+                        r$cash_barriers.social_discrimination == 1 | r$cash_barriers.insufficient_goods == 1 | r$cash_barriers.poor_quality == 1 ~ 1,
+                      r$cash_barriers.insufficient_money == 0 | r$cash_barriers.distance == 0 | r$cash_barriers.security_situation == 0 |
+                        r$cash_barriers.social_discrimination == 0 | r$cash_barriers.insufficient_goods == 0 | r$cash_barriers.poor_quality == 0 ~ 0,
+                      TRUE ~ NA_real_)
 
 # % of HHs reporting primary barriers to their food needs
 r$amm2_ii <- case_when(r$food_barriers.insufficient_money == 1 | r$food_barriers.distance == 1 | r$food_barriers.security_situation == 1 |
-                      r$food_barriers.social_discrimination == 1 | r$food_barriers.insufficient_goods == 1 | r$food_barriers.poor_quality == 1 ~ 1,
-                      TRUE ~ 0)
+                         r$food_barriers.social_discrimination == 1 | r$food_barriers.insufficient_goods == 1 | r$food_barriers.poor_quality == 1 ~ 1,
+                       r$food_barriers.insufficient_money == 0 | r$food_barriers.distance == 0 | r$food_barriers.security_situation == 0 |
+                         r$food_barriers.social_discrimination == 0 | r$food_barriers.insufficient_goods == 0 | r$food_barriers.poor_quality == 0 ~ 0,
+                       TRUE ~ NA_real_)
 
 # % of HHs reporting primary barriers to their shelter needs
 r$amm2_iii <- case_when(r$shelter_barriers.insufficient_money == 1 | r$shelter_barriers.distance == 1 | r$shelter_barriers.security_situation == 1 |
-                       r$shelter_barriers.social_discrimination == 1 | r$shelter_barriers.insufficient_goods == 1 | r$shelter_barriers.poor_quality == 1 ~ 1,
-                       TRUE ~ 0)
+                          r$shelter_barriers.social_discrimination == 1 | r$shelter_barriers.insufficient_goods == 1 | r$shelter_barriers.poor_quality == 1 ~ 1,
+                        r$shelter_barriers.insufficient_money == 0 | r$shelter_barriers.distance == 0 | r$shelter_barriers.security_situation == 0 |
+                          r$shelter_barriers.social_discrimination == 0 | r$shelter_barriers.insufficient_goods == 0 | r$shelter_barriers.poor_quality == 0 ~ 0,
+                        TRUE ~ NA_real_)
 
 # % of HHs reporting primary barriers to their water needs
 r$amm2_iv <- case_when(r$water_barriers.insufficient_money == 1 | r$water_barriers.distance == 1 | r$water_barriers.security_situation == 1 |
-                       r$water_barriers.social_discrimination == 1 | r$water_barriers.insufficient_goods == 1 | r$water_barriers.poor_quality == 1 ~ 1,
-                       TRUE ~ 0)
+                         r$water_barriers.social_discrimination == 1 | r$water_barriers.insufficient_goods == 1 | r$water_barriers.poor_quality == 1 ~ 1,
+                       r$water_barriers.insufficient_money == 0 | r$water_barriers.distance == 0 | r$water_barriers.security_situation == 0 |
+                         r$water_barriers.social_discrimination == 0 | r$water_barriers.insufficient_goods == 0 | r$water_barriers.poor_quality == 0 ~ 0,
+                       TRUE ~ NA_real_)
 
 # % of HHs reporting primary barriers to their hygiene needs
 r$amm2_v <- case_when(r$hygiene_barriers.insufficient_money == 1 | r$hygiene_barriers.distance == 1 | r$hygiene_barriers.security_situation == 1 |
-                      r$hygiene_barriers.social_discrimination == 1 | r$hygiene_barriers.insufficient_goods == 1 | r$hygiene_barriers.poor_quality == 1 ~ 1,
-                      TRUE ~ 0)
+                        r$hygiene_barriers.social_discrimination == 1 | r$hygiene_barriers.insufficient_goods == 1 | r$hygiene_barriers.poor_quality == 1 ~ 1,
+                      r$hygiene_barriers.insufficient_money == 0 | r$hygiene_barriers.distance == 0 | r$hygiene_barriers.security_situation == 0 |
+                        r$hygiene_barriers.social_discrimination == 0 | r$hygiene_barriers.insufficient_goods == 0 | r$hygiene_barriers.poor_quality == 0 ~ 0,
+                      TRUE ~ NA_real_)
+
 # % of HHs reporting primary barriers to their health needs
 r$amm2_vi <- case_when(r$health_barriers.insufficient_money == 1 | r$health_barriers.distance == 1 | r$health_barriers.security_situation == 1 |
-                       r$health_barriers.social_discrimination == 1 | r$health_barriers.insufficient_goods == 1 | r$health_barriers.poor_quality == 1 ~ 1,
-                       TRUE ~ 0)
+                         r$health_barriers.social_discrimination == 1 | r$health_barriers.insufficient_goods == 1 | r$health_barriers.poor_quality == 1 ~ 1,
+                       r$health_barriers.insufficient_money == 0 | r$health_barriers.distance == 0 | r$health_barriers.security_situation == 0 |
+                         r$health_barriers.social_discrimination == 0 | r$health_barriers.insufficient_goods == 0 | r$health_barriers.poor_quality == 0 ~ 0,
+                       TRUE ~ NA_real_)
 # % of HHs reporting primary barriers to their education needs
 r$amm2_vii <- case_when(r$edu_barriers.insufficient_money == 1 | r$edu_barriers.distance == 1 | r$edu_barriers.security_situation == 1 |
-                        r$edu_barriers.social_discrimination == 1 | r$edu_barriers.insufficient_goods == 1 | r$edu_barriers.poor_quality == 1 ~ 1,
-                        TRUE ~ 0)
+                          r$edu_barriers.social_discrimination == 1 | r$edu_barriers.insufficient_goods == 1 | r$edu_barriers.poor_quality == 1 ~ 1,
+                        r$edu_barriers.insufficient_money == 0 | r$edu_barriers.distance == 0 | r$edu_barriers.security_situation == 0 |
+                          r$edu_barriers.social_discrimination == 0 | r$edu_barriers.insufficient_goods == 0 | r$edu_barriers.poor_quality == 0 ~ 0,
+                        TRUE ~ NA_real_)
 # % of HHs reporting primary barriers to their energy needs
 r$amm2_Viii <- case_when(r$energy_barriers.insufficient_money == 1 | r$energy_barriers.distance == 1 | r$energy_barriers.security_situation == 1 |
-                       r$energy_barriers.social_discrimination == 1 | r$energy_barriers.insufficient_goods == 1 | r$energy_barriers.poor_quality == 1 ~ 1,
-                       TRUE ~ 0)
+                           r$energy_barriers.social_discrimination == 1 | r$energy_barriers.insufficient_goods == 1 | r$energy_barriers.poor_quality == 1 ~ 1,
+                         r$energy_barriers.insufficient_money == 0 | r$energy_barriers.distance == 0 | r$energy_barriers.security_situation == 0 |
+                           r$energy_barriers.social_discrimination == 0 | r$energy_barriers.insufficient_goods == 0 | r$energy_barriers.poor_quality == 0 ~ 0,
+                         TRUE ~ NA_real_)
 # % of HHs reporting primary barriers to their transportation needs
 r$amm2_ix <- case_when(r$transportation_barriers.insufficient_money == 1 | r$transportation_barriers.distance == 1 | r$transportation_barriers.security_situation == 1 |
-                       r$transportation_barriers.social_discrimination == 1 | r$transportation_barriers.insufficient_goods == 1 | r$transportation_barriers.poor_quality == 1 ~ 1,
-                       TRUE ~ 0)
+                         r$transportation_barriers.social_discrimination == 1 | r$transportation_barriers.insufficient_goods == 1 | r$transportation_barriers.poor_quality == 1 ~ 1,
+                       r$transportation_barriers.insufficient_money == 0 | r$transportation_barriers.distance == 0 | r$transportation_barriers.security_situation == 0 |
+                         r$transportation_barriers.social_discrimination == 0 | r$transportation_barriers.insufficient_goods == 0 | r$transportation_barriers.poor_quality == 0 ~ 0,
+                       TRUE ~ NA_real_)
 # % of HHs reporting primary barriers to their hh_items needs
 r$amm2_x <- case_when(r$hh_items_barriers.insufficient_money == 1 | r$hh_items_barriers.distance == 1 | r$hh_items_barriers.security_situation == 1 |
-                       r$hh_items_barriers.social_discrimination == 1 | r$hh_items_barriers.insufficient_goods == 1 | r$hh_items_barriers.poor_quality == 1 ~ 1,
-                       TRUE ~ 0)
+                        r$hh_items_barriers.social_discrimination == 1 | r$hh_items_barriers.insufficient_goods == 1 | r$hh_items_barriers.poor_quality == 1 ~ 1,
+                      r$hh_items_barriers.insufficient_money == 0 | r$hh_items_barriers.distance == 0 | r$hh_items_barriers.security_situation == 0 |
+                        r$hh_items_barriers.social_discrimination == 0 | r$hh_items_barriers.insufficient_goods == 0 | r$hh_items_barriers.poor_quality == 0 ~ 0,
+                      TRUE ~ NA_real_)
+
 # % of HHs reporting primary barriers to their communication needs
 r$amm2_xi <- case_when(r$comms_barriers.insufficient_money == 1 | r$comms_barriers.distance == 1 | r$comms_barriers.security_situation == 1 |
-                       r$comms_barriers.social_discrimination == 1 | r$comms_barriers.insufficient_goods == 1 | r$comms_barriers.poor_quality == 1 ~ 1,
-                       TRUE ~ 0)
+                         r$comms_barriers.social_discrimination == 1 | r$comms_barriers.insufficient_goods == 1 | r$comms_barriers.poor_quality == 1 ~ 1,
+                       r$comms_barriers.insufficient_money == 0 | r$comms_barriers.distance == 0 | r$comms_barriers.security_situation == 0 |
+                         r$comms_barriers.social_discrimination == 0 | r$comms_barriers.insufficient_goods == 0 | r$comms_barriers.poor_quality == 0 ~ 0,
+                       TRUE ~ NA_real_)
 
 # % of HHs reporting primary barriers to their debt needs
 r$amm2_Xii <- case_when(r$debt_barriers.insufficient_money == 1 | r$debt_barriers.distance == 1 | r$debt_barriers.security_situation == 1 |
-                       r$debt_barriers.social_discrimination == 1 | r$debt_barriers.insufficient_goods == 1 | r$debt_barriers.poor_quality == 1 ~ 1,
-                       TRUE ~ 0)
+                          r$debt_barriers.social_discrimination == 1 | r$debt_barriers.insufficient_goods == 1 | r$debt_barriers.poor_quality == 1 ~ 1,
+                        r$debt_barriers.insufficient_money == 0 | r$debt_barriers.distance == 0 | r$debt_barriers.security_situation == 0 |
+                          r$debt_barriers.social_discrimination == 0 | r$debt_barriers.insufficient_goods == 0 | r$debt_barriers.poor_quality == 0 ~ 0,
+                        TRUE ~ NA_real_)
 
 # % of HHs reporting taking one of the following behaviors or activities during the duration they received MPCA
 # Pay down household debt in part
@@ -417,85 +428,6 @@ r$shocks6 <- case_when(r$shocks6_i == 1 | r$shocks6_ii== 1| r$shocks6_iv == 1 |r
                       TRUE ~ NA_real_)
 
 
-# % of households reporting reasons MPCA was ineffective In helping withstand shocks
-# % of households reporting reasons MPCA was ineffective In helping withstand shocks:shock of medical expenses
-r$shock7_i <- case_when(r$mpca_shock_ineffective_med.amount_small == 1 |r$mpca_shock_ineffective_med.did_not_receive_cash_intime == 1 |
-                        r$mpca_shock_ineffective_med.did_not_receive_cash_frequently == 1 | r$mpca_shock_ineffective_med.no_access_to_atms == 1 |
-                        r$mpca_shock_ineffective_med.cash_not_relevant == 1 ~ 1,
-                        r$mpca_shock_ineffective_med.amount_small == 0 |r$mpca_shock_ineffective_med.did_not_receive_cash_intime == 0 |
-                        r$mpca_shock_ineffective_med.did_not_receive_cash_frequently == 0 | r$mpca_shock_ineffective_med.no_access_to_atms == 0 |
-                        r$mpca_shock_ineffective_med.cash_not_relevant == 0 ~ 0,
-                        TRUE ~ NA_real_)
-
-
-# # % of households reporting reasons MPCA was ineffective In helping withstand shocks:shock of loss of inventory or produce
-# r$shock7_iii <- case_when(r$mpca_shock_ineffective_loss_inventory.amount_small == 1 |r$mpca_shock_ineffective_loss_inventory.did_not_receive_cash_intime == 1 |
-#                            r$mpca_shock_ineffective_loss_inventory.did_not_receive_cash_frequently == 1 | r$mpca_shock_ineffective_loss_inventory.no_access_to_atms == 1 |
-#                            r$mpca_shock_ineffective_loss_inventory.cash_not_relevant == 1 ~ 1,
-#                          r$mpca_shock_ineffective_loss_inventory.amount_small == 0 |r$mpca_shock_ineffective_loss_inventory.did_not_receive_cash_intime == 0 |
-#                            r$mpca_shock_ineffective_loss_inventory.did_not_receive_cash_frequently == 0 | r$mpca_shock_ineffective_loss_inventory.no_access_to_atms == 0 |
-#                            r$mpca_shock_ineffective_loss_inventory.cash_not_relevant == 0 ~ 0,
-#                          TRUE ~ NA_real_)
-
-# % of households reporting reasons MPCA was ineffective In helping withstand shocks:shock of arrival of new household members
-# r$shock7_iv <- case_when(r$mpca_shock_ineffective_new_member.amount_small == 1 |r$mpca_shock_ineffective_new_member.did_not_receive_cash_intime == 1 |
-#                            r$mpca_shock_ineffective_new_member.did_not_receive_cash_frequently == 1 | r$mpca_shock_ineffective_new_member.no_access_to_atms == 1 |
-#                            r$mpca_shock_ineffective_new_member.cash_not_relevant == 1 ~ 1,
-#                          r$mpca_shock_ineffective_new_member.amount_small == 0 |r$mpca_shock_ineffective_new_member.did_not_receive_cash_intime == 0 |
-#                            r$mpca_shock_ineffective_new_member.did_not_receive_cash_frequently == 0 | r$mpca_shock_ineffective_new_member.no_access_to_atms == 0 |
-#                            r$mpca_shock_ineffective_new_member.cash_not_relevant == 0 ~ 0,
-#                          TRUE ~ NA_real_)
-
-# % of households reporting reasons MPCA was ineffective In helping withstand shocks:shock of need to repair or replace a household item
-r$shock7_v <- case_when(r$mpca_shock_ineffective_repair_nfi.amount_small == 1 |r$mpca_shock_ineffective_repair_nfi.did_not_receive_cash_intime == 1 |
-                           r$mpca_shock_ineffective_repair_nfi.did_not_receive_cash_frequently == 1 | r$mpca_shock_ineffective_repair_nfi.no_access_to_atms == 1 |
-                           r$mpca_shock_ineffective_repair_nfi.cash_not_relevant == 1 ~ 1,
-                         r$mpca_shock_ineffective_repair_nfi.amount_small == 0 |r$mpca_shock_ineffective_repair_nfi.did_not_receive_cash_intime == 0 |
-                           r$mpca_shock_ineffective_repair_nfi.did_not_receive_cash_frequently == 0 | r$mpca_shock_ineffective_repair_nfi.no_access_to_atms == 0 |
-                           r$mpca_shock_ineffective_repair_nfi.cash_not_relevant == 0 ~ 0,
-                         TRUE ~ NA_real_)
-
-# % of households reporting reasons MPCA was ineffective In helping withstand shocks:shock of repairing a productive asset
-r$shock7_vi <- case_when(r$mpca_shock_ineffective_repair_asset.amount_small == 1 |r$mpca_shock_ineffective_repair_asset.did_not_receive_cash_intime == 1 |
-                           r$mpca_shock_ineffective_repair_asset.did_not_receive_cash_frequently == 1 | r$mpca_shock_ineffective_repair_asset.no_access_to_atms == 1 |
-                           r$mpca_shock_ineffective_repair_asset.cash_not_relevant == 1 ~ 1,
-                         r$mpca_shock_ineffective_repair_asset.amount_small == 0 |r$mpca_shock_ineffective_repair_asset.did_not_receive_cash_intime == 0 |
-                           r$mpca_shock_ineffective_repair_asset.did_not_receive_cash_frequently == 0 | r$mpca_shock_ineffective_repair_asset.no_access_to_atms == 0 |
-                           r$mpca_shock_ineffective_repair_asset.cash_not_relevant == 0 ~ 0,
-                         TRUE ~ NA_real_)
-
-# % of households reporting reasons MPCA was ineffective In helping withstand shocks:shock of education expenses
-r$shock7_vii <- case_when(r$mpca_shock_ineffective_edu.amount_small == 1 |r$mpca_shock_ineffective_edu.did_not_receive_cash_intime == 1 |
-                           r$mpca_shock_ineffective_edu.did_not_receive_cash_frequently == 1 | r$mpca_shock_ineffective_edu.no_access_to_atms == 1 |
-                           r$mpca_shock_ineffective_edu.cash_not_relevant == 1 ~ 1,
-                         r$mpca_shock_ineffective_edu.amount_small == 0 |r$mpca_shock_ineffective_edu.did_not_receive_cash_intime == 0 |
-                           r$mpca_shock_ineffective_edu.did_not_receive_cash_frequently == 0 | r$mpca_shock_ineffective_edu.no_access_to_atms == 0 |
-                           r$mpca_shock_ineffective_edu.cash_not_relevant == 0 ~ 0,
-                         TRUE ~ NA_real_)
-
-# % of households reporting reasons MPCA was ineffective In helping withstand shocks:shock of shelter expenses
-r$shock7_viii <- case_when(r$mpca_shock_ineffective_shelter.amount_small == 1 |r$mpca_shock_ineffective_shelter.did_not_receive_cash_intime == 1 |
-                           r$mpca_shock_ineffective_shelter.did_not_receive_cash_frequently == 1 | r$mpca_shock_ineffective_shelter.no_access_to_atms == 1 |
-                           r$mpca_shock_ineffective_shelter.cash_not_relevant == 1 ~ 1,
-                         r$mpca_shock_ineffective_shelter.amount_small == 0 |r$mpca_shock_ineffective_shelter.did_not_receive_cash_intime == 0 |
-                           r$mpca_shock_ineffective_shelter.did_not_receive_cash_frequently == 0 | r$mpca_shock_ineffective_shelter.no_access_to_atms == 0 |
-                           r$mpca_shock_ineffective_shelter.cash_not_relevant == 0 ~ 0,
-                         TRUE ~ NA_real_)
-
-# % of households reporting reasons MPCA was ineffective In helping withstand shocks:shock of debt payment
-r$shock7_xi <- case_when(r$mpca_shock_ineffective_debt.amount_small == 1 |r$mpca_shock_ineffective_debt.did_not_receive_cash_intime == 1 |
-                           r$mpca_shock_ineffective_debt.did_not_receive_cash_frequently == 1 | r$mpca_shock_ineffective_debt.no_access_to_atms == 1 |
-                           r$mpca_shock_ineffective_debt.cash_not_relevant == 1 ~ 1,
-                         r$mpca_shock_ineffective_debt.amount_small == 0 |r$mpca_shock_ineffective_debt.did_not_receive_cash_intime == 0 |
-                           r$mpca_shock_ineffective_debt.did_not_receive_cash_frequently == 0 | r$mpca_shock_ineffective_debt.no_access_to_atms == 0 |
-                           r$mpca_shock_ineffective_debt.cash_not_relevant == 0 ~ 0,
-                         TRUE ~ NA_real_)
-
-# % of households reporting reasons MPCA was ineffective In helping withstand shocks
-
-r$shocks7 <- case_when(r$shock7_i == 1 |r$shock7_v == 1|r$shock7_vi == 1|r$shock7_vii == 1|r$shock7_viii == 1 | r$shock7_xi == 1 ~ 1,
-                       r$shock7_i == 0 |r$shock7_v == 0|r$shock7_vi == 0|r$shock7_vii == 0|r$shock7_viii == 0 | r$shock7_xi == 0 ~ 0,
-                       TRUE ~ NA_real_)
 
 # % of HHs by reported income sources
 # Salary from regular employment (private sector)
@@ -616,124 +548,53 @@ r$hh22_xiii <- case_when(r$electricity_exp > 0 ~ 1,
 r$food_share <- round((as.numeric(r$food_exp)/ as.numeric(r$total_exp))*100, 0)
 r$hh23_i <- ifelse(r$food_share > 100, NA, 
                  r$food_share)
-# df_new <-r %>%  select(refugee_status, food_exp) %>% 
-#   filter(refugee_status == "refugee") %>% 
-#   summarise(Average_food = round(mean(food_exp, na.rm = T), 0)) 
-# 
-# df_new <-r %>%  select(refugee_status, food_exp) %>% 
-#   filter(refugee_status == "non_refugee") %>% 
-#   summarise(Average_food = round(mean(food_exp, na.rm = T), 0))
 
-# Clothing and shoes 
-# r$hh23_ii <- round(mean(r$clothing_exp, na.rm = TRUE),0)
 
 r$clothing_share <- round((as.numeric(r$clothing_exp)/ as.numeric(r$total_exp))*100, 0)
 r$hh23_ii <- ifelse(r$clothing_share > 100, NA, 
                     r$clothing_share)
-# df_new <-r %>%  select(refugee_status, clothing_exp) %>% 
-#   filter(refugee_status == "refugee") %>% 
-#   summarise(Average_food = round(mean(clothing_exp, na.rm = T), 0)) 
-# 
-# df_new <-r %>%  select(refugee_status, clothing_exp) %>% 
-#   filter(refugee_status == "non_refugee") %>% 
-#   summarise(Average_food = round(mean(clothing_exp, na.rm = T), 0))
 
-# housing
-# r$hh23_iii <- round(mean(r$housing_exp, na.rm = TRUE),0)
 
 r$housing_share <- round((as.numeric(r$housing_exp)/ as.numeric(r$total_exp))*100, 0)
 r$hh23_iii <- ifelse(r$housing_share > 100, NA, 
                     r$housing_share)
 
-# df_new <-r %>%  select(refugee_status, debt_repayment) %>% 
-#   filter(refugee_status == "refugee") %>% 
-#   summarise(Average_food = round(mean(debt_repayment, na.rm = T), 0)) 
-# 
-# df_new <-r %>%  select(refugee_status, debt_repayment) %>% 
-#   filter(refugee_status == "non_refugee") %>% 
-#   summarise(Average_food = round(mean(debt_repayment, na.rm = T), 0))
 
-
-# home appliances 
-# r$hh23_iv <- round(mean(r$appliances_exp, na.rm = TRUE),0)
 
 r$appliance_share <- round((as.numeric(r$appliances_exp)/ as.numeric(r$total_exp))*100, 0)
 r$hh23_iv <- ifelse(r$appliance_share > 100, NA, 
                     r$appliance_share)
 
 
-# df_new <-r %>%  select(refugee_status, debt_repayment) %>% 
-#   filter(refugee_status == "refugee") %>% 
-#   summarise(Average_food = round(mean(debt_repayment, na.rm = T), 0)) 
-# 
-# df_new <-r %>%  select(refugee_status, debt_repayment) %>% 
-#   filter(refugee_status == "non_refugee") %>% 
-#   summarise(Average_food = round(mean(debt_repayment, na.rm = T), 0))
-
-# Debt repayment
-# r$hh23_v <- round(mean(r$debt_repayment, na.rm = TRUE),0)
 
 r$debt_share <- round((as.numeric(r$debt_repayment)/ as.numeric(r$total_exp))*100, 0)
 r$hh23_v <- ifelse(r$debt_share > 100, NA, 
                     r$debt_share)
 
 
-# df_new <-r %>%  select(refugee_status, debt_repayment) %>% 
-#   filter(refugee_status == "refugee") %>% 
-#   summarise(Average_food = round(mean(debt_repayment, na.rm = T), 0)) 
-# 
-# df_new <-r %>%  select(refugee_status, debt_repayment) %>% 
-#   filter(refugee_status == "non_refugee") %>% 
-#   summarise(Average_food = round(mean(debt_repayment, na.rm = T), 0))
-# house needs 
-# r$hh23_vi <- round(mean(r$house_needs_exp, na.rm = TRUE),0)
+
+
 
 r$needs_share <- round((as.numeric(r$house_needs_exp)/ as.numeric(r$total_exp))*100, 0)
 r$hh23_vi <- ifelse(r$needs_share > 100, NA, 
                    r$needs_share)
 
-# df_new <-r %>%  select(refugee_status, house_needs_exp) %>% 
-#   filter(refugee_status == "refugee") %>% 
-#   summarise(Average_food = round(mean(house_needs_exp, na.rm = T), 0)) 
-# 
-# df_new <-r %>%  select(refugee_status, house_needs_exp) %>% 
-#   filter(refugee_status == "non_refugee") %>% 
-#   summarise(Average_food = round(mean(house_needs_exp, na.rm = T), 0))
-# health care 
-# r$hh23_vii <- round(mean(r$health_exp, na.rm = TRUE),0)
+
+
 
 r$health_share <- round((as.numeric(r$health_exp)/ as.numeric(r$total_exp))*100, 0)
 r$hh23_vii <- ifelse(r$health_share > 100, NA, 
                     r$health_share)
 
 
-# df_new <-r %>%  select(refugee_status, health_exp) %>% 
-#   filter(refugee_status == "refugee") %>% 
-#   summarise(Average_food = round(mean(health_exp, na.rm = T), 0)) 
-# 
-# df_new <-r %>%  select(refugee_status, health_exp) %>% 
-#   filter(refugee_status == "non_refugee") %>% 
-#   summarise(Average_food = round(mean(health_exp, na.rm = T), 0))
 
-# transportation
-# r$hh23_viii <- round(mean(r$transp_exp, na.rm = TRUE),0)
 
 r$trans_share <- round((as.numeric(r$transp_exp)/ as.numeric(r$total_exp))*100, 0)
 r$hh23_viii <- ifelse(r$trans_share > 100, NA, 
                      r$trans_share)
 
 
-# df_new <-r %>%  select(refugee_status, transp_exp) %>% 
-#   filter(refugee_status == "refugee") %>% 
-#   summarise(Average_food = round(mean(transp_exp, na.rm = T), 0)) 
-# 
-# df_new <-r %>%  select(refugee_status, transp_exp) %>% 
-#   filter(refugee_status == "non_refugee") %>% 
-#   summarise(Average_food = round(mean(transp_exp, na.rm = T), 0))
-# 
 
-# communication
-# r$hh23_ix <- round(mean(r$communication_exp, na.rm = TRUE),0)
 
 r$comms_share <- round((as.numeric(r$communication_exp)/ as.numeric(r$total_exp))*100, 0)
 r$hh23_ix <- ifelse(r$comms_share > 100, NA, 
@@ -741,117 +602,38 @@ r$hh23_ix <- ifelse(r$comms_share > 100, NA,
 
 
 
-# df_new <-r %>%  select(refugee_status, communication_exp) %>% 
-#   filter(refugee_status == "refugee") %>% 
-#   summarise(Average_food = round(mean(communication_exp, na.rm = T), 0)) 
-# 
-# df_new <-r %>%  select(refugee_status, communication_exp) %>% 
-#   filter(refugee_status == "non_refugee") %>% 
-#   summarise(Average_food = round(mean(communication_exp, na.rm = T), 0))
-# 
-
-# cultural and recreational activities 
-# r$hh23_x <- round(mean(r$recreation_exp, na.rm = TRUE),0)
 
 r$recreation_share <- round((as.numeric(r$recreation_exp)/ as.numeric(r$total_exp))*100, 0)
 r$hh23_x <- ifelse(r$recreation_share > 100, NA, 
                     r$recreation_share)
 
 
-# df_new <-r %>%  select(refugee_status, recreation_exp) %>% 
-#   filter(refugee_status == "refugee") %>% 
-#   summarise(Average_food = round(mean(recreation_exp, na.rm = T), 0)) 
-# 
-# df_new <-r %>%  select(refugee_status, recreation_exp) %>% 
-#   filter(refugee_status == "non_refugee") %>% 
-#   summarise(Average_food = round(mean(recreation_exp, na.rm = T), 0))
 
-
-# personal care 
-# r$hh23_xi <- round(mean(r$personal_exp, na.rm = TRUE),0)
 
 r$personal_share <- round((as.numeric(r$personal_exp)/ as.numeric(r$total_exp))*100, 0)
 r$hh23_xi <- ifelse(r$personal_share > 100, NA, 
                    r$personal_share)
 
-# df_new <-r %>%  select(refugee_status, personal_exp) %>% 
-#   filter(refugee_status == "refugee") %>% 
-#   summarise(Average_food = round(mean(personal_exp, na.rm = T), 0)) 
-# 
-# df_new <-r %>%  select(refugee_status, personal_exp) %>% 
-#   filter(refugee_status == "non_refugee") %>% 
-#   summarise(Average_food = round(mean(personal_exp, na.rm = T), 0))
 
-# cigarettes and tobacco
-# r$hh23_xii <- round(mean(r$cigarettes_exp, na.rm = TRUE),0)
 
 r$cigarettes_share <- round((as.numeric(r$cigarettes_exp)/ as.numeric(r$total_exp))*100, 0)
 r$hh23_xii <- ifelse(r$cigarettes_share > 100, NA, 
                     r$cigarettes_share)
 
-# df_new <-r %>%  select(refugee_status, cigarettes_exp) %>% 
-#   filter(refugee_status == "refugee") %>% 
-#   summarise(Average_food = round(mean(cigarettes_exp, na.rm = T), 0)) 
-# 
-# df_new <-r %>%  select(refugee_status, cigarettes_exp) %>% 
-#   filter(refugee_status == "non_refugee") %>% 
-#   summarise(Average_food = round(mean(cigarettes_exp, na.rm = T), 0))
-# 
 
-# electricity including bells, fuels, repairs
-# r$hh23_xiii <- round(mean(r$electricity_exp, na.rm = TRUE),0)
 
 r$electricity_share <- round((as.numeric(r$electricity_exp)/ as.numeric(r$total_exp))*100, 0)
 r$hh23_xiii <- ifelse(r$electricity_share > 100, NA, 
                     r$electricity_share)
 
-# df_new <-r %>%  select(refugee_status, electricity_exp) %>% 
-#   filter(refugee_status == "refugee") %>% 
-#   summarise(Average_food = round(mean(electricity_exp, na.rm = T), 0)) 
-# 
-# df_new <-r %>%  select(refugee_status, electricity_exp) %>% 
-#   filter(refugee_status == "non_refugee") %>% 
-#   summarise(Average_food = round(mean(electricity_exp, na.rm = T), 0))
-
 
 r$hh24 <- round(mean(r$total_exp, na.rm = TRUE),0)
 
 
-# df_new <-r %>%  select(refugee_status, total_exp) %>% 
-#   filter(refugee_status == "refugee") %>% 
-#   summarise(Average_food = round(mean(total_exp, na.rm = T), 0)) 
-# 
-# df_new <-r %>%  select(refugee_status, total_exp) %>% 
-#   filter(refugee_status == "non_refugee") %>% 
-#   summarise(Average_food = round(mean(total_exp, na.rm = T), 0))
+
 
 ##% HH relying on stress / crisis / emergency strategies to cope with a lack of food or money to buy it
-r$stress <-
-  ifelse(
-    r$selling_hh_properties %in% c("no_already_did", "yes") |
-      r$buying_goods_on_credit %in% c("no_already_did", "yes") |
-      r$reduced_health_expenses %in% c("no_already_did", "yes"), 
-    1,
-    0  
-  )
 
-r$crisis <-
-  ifelse(
-    r$selling_productive_assets %in% c("no_already_did", "yes") |
-      r$sold_house_land %in% c("no_already_did", "yes") |
-      r$withdrew_children_from_school %in% c("no_already_did", "yes"),
-    1,
-    0
-  )
-
-r$emergency <-
-  ifelse(
-    r$school_drop_out %in% c("no_already_did", "yes") |
-      r$engaging_in_risky_behaviour %in% c("no_already_did", "yes") |
-      r$hh_migrated %in% c("no_already_did", "yes"),
-    1,
-    0
-  )
 
 r$hh25_i <- case_when(r$selling_hh_properties %in% c("no_already_did", "yes") ~ 1,
                       r$selling_hh_properties %in% c("not_applicable", "no_no_one_in_HH") ~ 0,
@@ -1054,7 +836,7 @@ r$aap <- case_when(r$complaint_mechanisms == "yes" ~ 1,
 r$aap2_i <- case_when(r$time_resolve_complaint == "less_than_two" ~ 1,
                     is.na(r$time_resolve_complaint) ~ NA_real_,
                     TRUE ~ 0)
-r$aap2_ii <- case_when(r$time_resolve_complaint == "less_than_two" ~ 1,
+r$aap2_ii <- case_when(r$time_resolve_complaint == "less_than_three" ~ 1,
                     is.na(r$time_resolve_complaint) ~ NA_real_,
                     TRUE ~ 0)
 r$aap2_iii <- case_when(r$time_resolve_complaint == "three_weeks_or_more" ~ 1,
