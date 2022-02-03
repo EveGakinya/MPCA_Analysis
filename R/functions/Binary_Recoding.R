@@ -5,6 +5,21 @@ recoding_preliminary <- function(r) {
   
   r=response
 
+
+  
+r$hhh_gender <- case_when( r$hhh == "yes" & r$gender_respondent_r == "female"| r$sex_head_hh == "female" ~  "Female",
+                         TRUE ~ "Male")
+  
+# % of households with at least one member with a disability
+r$HH_with_Disability <- case_when( r$pwd == "yes" ~ "withdisability",
+                    TRUE ~ "nodisability")
+
+# % of households with at least one member with a chronic disease
+r$HH_with_chronic_disease <- case_when( r$chronic_disease == "yes" ~ "with_chronic",
+                                TRUE ~ "no_chronic")
+
+  
+  
 # % of interviews conducted with head of household
 r$hh1 <- case_when(r$hhh == "yes" ~ 1, TRUE ~ 0)
 
@@ -54,9 +69,13 @@ r$hh5 <-case_when(r$preg_lact == "yes" ~ 1,
                   r$preg_lact == "no"~ 0,
                   TRUE ~ NA_real_)
 
+# # % of households with at least one member with a disability
+r$pwd_1 <- case_when( r$pwd == "yes" ~ 1,
+                   TRUE ~ 0)
+
 # % of households with at least one member with a chronic disease
-r$pwd <- case_when( r$pwd == "yes" ~ 1,
-                  TRUE ~ 0)
+r$chronic_illness <- case_when( r$chronic_disease == "yes" ~ 1,
+                    TRUE ~ 0)
 
 # % of households reporting being displaced as a result of the May Escalation
 r$displaced_escalation <- case_when( r$displaced_escalation == "yes" ~ 1,
@@ -126,57 +145,196 @@ r$cva_gov <- case_when(r$receive_other_assistance_which == "cva_gov" ~ 1,
                      TRUE ~ 0)
 # % of HHs reporting that transfer amount has met their basic needs
 # % of HHs reporting that transfer amount has met their cash needs
-r$amm1_i <- case_when(r$cash %in% c("mostly_able","fully_able")~1,
-                    r$cash %in% c("completely_unable","partially_able")~0,
+r$amm1_i <- case_when(r$cash %in% c("3.5","5")~1,
+                    r$cash %in% c("0","1.5")~0,
                     TRUE~ NA_real_)
 # % of HHs reporting that transfer amount has met their food needs
-r$amm1_ii <- case_when(r$food %in% c("mostly_able","fully_able")~1,
-                    r$food %in% c("completely_unable","partially_able")~0,
+r$amm1_ii <- case_when(r$food %in% c("3.5","5")~1,
+                    r$food %in% c("0","1.5")~0,
                     TRUE~ NA_real_)
 # % of HHs reporting that transfer amount has met their shelter needs
-r$amm1_iii <- case_when(r$shelter %in% c("mostly_able","fully_able")~1,
-                    r$shelter %in% c("completely_unable","partially_able")~0,
+r$amm1_iii <- case_when(r$shelter %in% c("3.5","5")~1,
+                    r$shelter %in% c("0","1.5")~0,
                     TRUE~ NA_real_)
 # % of HHs reporting that transfer amount has met their water needs
-r$amm1_iv <- case_when(r$water %in% c("mostly_able","fully_able")~1,
-                    r$water %in% c("completely_unable","partially_able")~0,
+r$amm1_iv <- case_when(r$water %in% c("3.5","5")~1,
+                    r$water %in% c("0","1.5")~0,
                     TRUE~ NA_real_)
 
 # % of HHs reporting that transfer amount has met their hygiene needs
-r$amm1_v <- case_when(r$hygiene %in% c("mostly_able","fully_able")~1,
-                    r$hygiene %in% c("completely_unable","partially_able")~0,
+r$amm1_v <- case_when(r$hygiene %in% c("3.5","5")~1,
+                    r$hygiene %in% c("0","1.5")~0,
                     TRUE~ NA_real_)
 
 # % of HHs reporting that transfer amount has met their health needs
-r$amm1_vi <- case_when(r$health %in% c("mostly_able","fully_able")~1,
-                    r$health %in% c("completely_unable","partially_able")~0,
+r$amm1_vi <- case_when(r$health %in% c("3.5","5")~1,
+                    r$health %in% c("0","1.5")~0,
                     TRUE~ NA_real_)
 # % of HHs reporting that transfer amount has met their education needs
-r$amm1_vii <- case_when(r$education %in% c("mostly_able","fully_able")~1,
-                    r$education %in% c("completely_unable","partially_able")~0,
+r$amm1_vii <- case_when(r$education %in% c("3.5","5")~1,
+                    r$education %in% c("0","1.5")~0,
                     TRUE~ NA_real_)
 # % of HHs reporting that transfer amount has met their energy needs
-r$amm1_viii <- case_when(r$energy %in% c("mostly_able","fully_able")~1,
-                    r$energy %in% c("completely_unable","partially_able")~0,
+r$amm1_viii <- case_when(r$energy %in% c("3.5","5")~1,
+                    r$energy %in% c("0","1.5")~0,
                     TRUE~ NA_real_)
 # % of HHs reporting that transfer amount has met their transportation needs
-r$amm1_ix <- case_when(r$transportation %in% c("mostly_able","fully_able")~1,
-                    r$transportation %in% c("completely_unable","partially_able")~0,
+r$amm1_ix <- case_when(r$transportation %in% c("3.5","5")~1,
+                    r$transportation %in% c("0","1.5")~0,
                     TRUE~ NA_real_)
 # % of HHs reporting that transfer amount has met their hh_items needs
-r$amm1_x <- case_when(r$hh_items %in% c("mostly_able","fully_able")~1,
-                    r$hh_items %in% c("completely_unable","partially_able")~0,
+r$amm1_x <- case_when(r$hh_items %in% c("3.5","5")~1,
+                    r$hh_items %in% c("0","1.5")~0,
                     TRUE~ NA_real_)
 # % of HHs reporting that transfer amount has met their communication needs
-r$amm1_xi <- case_when(r$communication %in% c("mostly_able","fully_able")~1,
-                    r$communication %in% c("completely_unable","partially_able")~0,
+r$amm1_xi <- case_when(r$communication %in% c("3.5","5")~1,
+                    r$communication %in% c("0","1.5")~0,
                     TRUE~ NA_real_)
 # % of HHs reporting that transfer amount has met their debt needs
-r$amm1_xii <- case_when(r$debt %in% c("mostly_able","fully_able")~1,
-                    r$debt %in% c("completely_unable","partially_able")~0,
+r$amm1_xii <- case_when(r$debt %in% c("3.5","5")~1,
+                    r$debt %in% c("0","1.5")~0,
                     TRUE~ NA_real_)
 
 
+#replacing all expenditures to NA whose total expenses are NA
+r$shelter_need <- case_when(r$shelter == "fully_able" ~ 5,
+                  r$shelter == "partially_able" ~ 1.5,
+                  r$shelter == "mostly_able" ~ 3.5,
+                  r$shelter == "completely_unable" ~ 0,
+                  TRUE ~ NA_real_)
+
+r$food_need <- case_when(r$food == "fully_able" ~ 5,
+                         r$food == "partially_able" ~ 1.5,
+                         r$food == "mostly_able" ~ 3.5,
+                         r$food == "completely_unable" ~ 0,
+                         TRUE ~ NA_real_)
+
+r$water_need <- case_when(r$water == "fully_able" ~ 5,
+                         r$water == "partially_able" ~ 1.5,
+                         r$water == "mostly_able" ~ 3.5,
+                         r$water == "completely_unable" ~ 0,
+                         TRUE ~ NA_real_)
+
+r$hygiene_need <- case_when(r$hygiene == "fully_able" ~ 5,
+                         r$hygiene == "partially_able" ~ 1.5,
+                         r$hygiene == "mostly_able" ~ 3.5,
+                         r$hygiene == "completely_unable" ~ 0,
+                         TRUE ~ NA_real_)
+
+r$health_need <- case_when(r$health == "fully_able" ~ 5,
+                         r$health == "partially_able" ~ 1.5,
+                         r$health == "mostly_able" ~ 3.5,
+                         r$health == "completely_unable" ~ 0,
+                         TRUE ~ NA_real_)
+
+
+r$education_need <- case_when(r$education == "fully_able" ~ 5,
+                         r$education == "partially_able" ~ 1.5,
+                         r$education == "mostly_able" ~ 3.5,
+                         r$education == "completely_unable" ~ 0,
+                         TRUE ~ NA_real_)
+
+
+r$energy_need <- case_when(r$energy == "fully_able" ~ 5,
+                         r$energy == "partially_able" ~ 1.5,
+                         r$energy == "mostly_able" ~ 3.5,
+                         r$energy == "completely_unable" ~ 0,
+                         TRUE ~ NA_real_)
+
+
+r$transportation_need <- case_when(r$transportation == "fully_able" ~ 5,
+                         r$transportation == "partially_able" ~ 1.5,
+                         r$transportation == "mostly_able" ~ 3.5,
+                         r$transportation == "completely_unable" ~ 0,
+                         TRUE ~ NA_real_)
+
+r$hh_items_need <- case_when(r$hh_items == "fully_able" ~ 5,
+                         r$hh_items == "partially_able" ~ 1.5,
+                         r$hh_items == "mostly_able" ~ 3.5,
+                         r$hh_items == "completely_unable" ~ 0,
+                         TRUE ~ NA_real_)
+
+r$communication_need <- case_when(r$communication == "fully_able" ~ 5,
+                             r$communication == "partially_able" ~ 1.5,
+                             r$communication == "mostly_able" ~ 3.5,
+                             r$communication == "completely_unable" ~ 0,
+                             TRUE ~ NA_real_)
+
+# % of HHs reporting that transfer amount has met their basic needs
+# % of HHs reporting that transfer amount has met their cash needs
+r$amm1_i <- case_when(r$cash %in% c("3.5","5")~1,
+                      r$cash %in% c("0","1.5")~0,
+                      TRUE~ NA_real_)
+# % of HHs reporting that transfer amount has met their food needs
+r$amm1_ii <- case_when(r$food %in% c("3.5","5")~1,
+                       r$food %in% c("0","1.5")~0,
+                       TRUE~ NA_real_)
+# % of HHs reporting that transfer amount has met their shelter needs
+r$amm1_iii <- case_when(r$shelter %in% c("3.5","5")~1,
+                        r$shelter %in% c("0","1.5")~0,
+                        TRUE~ NA_real_)
+# % of HHs reporting that transfer amount has met their water needs
+r$amm1_iv <- case_when(r$water %in% c("3.5","5")~1,
+                       r$water %in% c("0","1.5")~0,
+                       TRUE~ NA_real_)
+
+# % of HHs reporting that transfer amount has met their hygiene needs
+r$amm1_v <- case_when(r$hygiene %in% c("3.5","5")~1,
+                      r$hygiene %in% c("0","1.5")~0,
+                      TRUE~ NA_real_)
+
+# % of HHs reporting that transfer amount has met their health needs
+r$amm1_vi <- case_when(r$health %in% c("3.5","5")~1,
+                       r$health %in% c("0","1.5")~0,
+                       TRUE~ NA_real_)
+# % of HHs reporting that transfer amount has met their education needs
+r$amm1_vii <- case_when(r$education %in% c("3.5","5")~1,
+                        r$education %in% c("0","1.5")~0,
+                        TRUE~ NA_real_)
+# % of HHs reporting that transfer amount has met their energy needs
+r$amm1_viii <- case_when(r$energy %in% c("3.5","5")~1,
+                         r$energy %in% c("0","1.5")~0,
+                         TRUE~ NA_real_)
+# % of HHs reporting that transfer amount has met their transportation needs
+r$amm1_ix <- case_when(r$transportation %in% c("3.5","5")~1,
+                       r$transportation %in% c("0","1.5")~0,
+                       TRUE~ NA_real_)
+# % of HHs reporting that transfer amount has met their hh_items needs
+r$amm1_x <- case_when(r$hh_items %in% c("3.5","5")~1,
+                      r$hh_items %in% c("0","1.5")~0,
+                      TRUE~ NA_real_)
+# % of HHs reporting that transfer amount has met their communication needs
+r$amm1_xi <- case_when(r$communication %in% c("3.5","5")~1,
+                       r$communication %in% c("0","1.5")~0,
+                       TRUE~ NA_real_)
+# % of HHs reporting that transfer amount has met their debt needs
+r$amm1_xii <- case_when(r$debt %in% c("3.5","5")~1,
+                        r$debt %in% c("0","1.5")~0,
+                        TRUE~ NA_real_)
+
+
+
+
+
+r$total_need <- r$shelter_need + r$food_need + r$water_need + r$hygiene_need + r$health_need + r$education_need + r$energy_need + r$transportation_need + r$hh_items_need + r$communication_need
+
+r$average_need <-round(r$total_need/50, 2)
+
+r$msi <- case_when(r$average_need <= 0.50 ~ 0,
+                   r$average_need > 0.50 ~1,
+                   TRUE ~ NA_real_)
+
+# Based on the average MNI scores, households can be defined “not able” (0.0 – 0.25), only “partially able” (0.26 – 0.50), “mostly 
+# able” (0.51 – 0.75), or “fully able” (0.76 – 1)
+
+
+
+# % of HHs reporting that transfer amount has met their needs
+r$amm1 <- case_when(r$amm1_i == 1 | r$amm1_ii == 1 | r$amm1_iii == 1 | r$amm1_iv == 1 | r$amm1_v == 1 | r$amm1_vi == 1 | r$amm1_vii == 1 |
+                      r$amm1_viii == 1 | r$amm1_ix == 1 | r$amm1_x == 1 | r$amm1_xi == 1 | r$amm1_xii == 1 ~ 1,
+                    r$amm1_i == 0 | r$amm1_ii == 0 | r$amm1_iii == 0 | r$amm1_iv == 0 | r$amm1_v == 0 | r$amm1_vi == 0 | r$amm1_vii == 0 |
+                      r$amm1_viii == 0 | r$amm1_ix == 0 | r$amm1_x == 0 | r$amm1_xi == 0 | r$amm1_xii == 0 ~ 0,
+                    TRUE ~ NA_real_)
 # % of HHs reporting primary barriers to their cash needs
 r$amm2_i <- case_when(r$cash_barriers.insufficient_money == 1 | r$cash_barriers.distance == 1 | r$cash_barriers.security_situation == 1 |
                         r$cash_barriers.social_discrimination == 1 | r$cash_barriers.insufficient_goods == 1 | r$cash_barriers.poor_quality == 1 ~ 1,
@@ -672,6 +830,31 @@ r$hh25_xi <- case_when(r$hh_migrated %in% c("no_already_did","yes") ~ 1,
                       r$hh_migrated %in% c("not_applicable", "no_no_one_in_HH") ~ 0,
                       TRUE ~ NA_real_)
 
+r$hh25 <- case_when(
+  r$hh25_i == 1 |
+  r$hh25_ii == 1 |
+  r$hh25_iii  == 1 |
+  r$hh25_iv  == 1 |
+  r$hh25_v  == 1 |
+  r$hh25_vi  == 1 |
+  r$hh25_vii  == 1 |
+  r$hh25_viii  == 1 |
+  r$hh25_ix  == 1 |
+  r$hh25_x  == 1 |
+  r$hh25_xi  == 1 ~ 1,
+  r$hh25_i == 0 |
+  r$hh25_ii == 0 |
+  r$hh25_iii  == 0 |
+  r$hh25_iv  == 0 |
+  r$hh25_v  == 0 |
+  r$hh25_vi  == 0 |
+  r$hh25_vii  == 0 |
+  r$hh25_viii  == 0 |
+  r$hh25_ix  == 0 |
+  r$hh25_x  == 0 |
+  r$hh25_xi  == 0 ~ 0,
+  TRUE ~ NA_real_
+)
 
 # % of households reporting how their financial situation compares to before receiving MPCA
 
@@ -858,6 +1041,23 @@ r$aap3_constant <- case_when(r$satisfaction_complaint == "neither_satisfied" ~ 1
 r$aap3_dissatisfied <- case_when(r$satisfaction_complaint %in% c("dissatisfied","very_dissatisfied") ~ 1,
                             is.na(r$satisfaction_complaint) ~ NA_real_,
                             TRUE ~ 0)
+
+# % of HHs reporting their top three priorities following the May Escalation
+
+
+r$shock1 <- case_when( r$escalation_priorities.food == 1 |
+                       r$escalation_priorities.shelter == 1 |
+                       r$escalation_priorities.water == 1 |
+                       r$escalation_priorities.hygiene == 1 |
+                       r$escalation_priorities.health == 1 |
+                       r$escalation_priorities.energy == 1 |
+                       r$escalation_priorities.transportation == 1 |
+                       r$escalation_priorities.hh_items == 1 |
+                       r$escalation_priorities.communication == 1 |
+                       r$escalation_priorities.legal_services == 1 ~ 1,
+                       TRUE ~ 0)
+
+
 
 return(r)
 }

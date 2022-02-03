@@ -7,11 +7,13 @@ pretty.output <- function(summary, independent.var.value, analysisplan) {
     analplan_subset <- analysisplan[which(analysisplan$independent.variable == independent.var),]
   }
   vars <- unique(subset$dependent.var)
-  # districts <- unique(subset$repeat.var.value)
+  districts <- unique(subset$repeat.var.value)
   # start <- ifelse(camp, 1, 19)
-   df <- data.frame(governorate = "gaza",  
-                    district = "gaza", stringsAsFactors = F)
- 
+   # df <- data.frame(governorate = "gaza",  
+   #                  district = "gaza", stringsAsFactors = F)
+   df <- data.frame(governorate = "gaza",
+                    district = districts, stringsAsFactors = F)
+   # 
    for(i in 1:length(vars)){
      var_result <- subset[which(subset$dependent.var == vars[i]),]
      df[,vars[i]] <- var_result$numbers

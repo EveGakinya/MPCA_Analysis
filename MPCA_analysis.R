@@ -42,20 +42,20 @@ dap_name <- "mpca_preliminary"
 analysisplan <- read.csv(sprintf("input/dap/dap_%s.csv",dap_name), stringsAsFactors = F)
 
 
-analysisplan$independent.variable <-  "refugee_status"
+# analysisplan$independent.variable <-  "refugee_status"
+# 
+# analysisplan$independent.variable.type <- "categorical"
 
-analysisplan$independent.variable.type <- "categorical"
-
-
+analysisplan$repeat.for.variable <- "HH_with_chronic_disease"
 #AGGREGATE ACROSS DISTRICTS OR/AND POPULATION GROUPS
-analysisplan <- analysisplan_nationwide(analysisplan)
-
+# analysisplan <- analysisplan_nationwide(analysisplan)
+analysisplan <- analysisplan_pop_group_aggregated(analysisplan)
 
 result <- from_analysisplan_map_to_output(response_with_composites, analysisplan = analysisplan,
                                           questionnaire = questionnaire, confidence_level = 0.95)
 
 
-name <- "oPt_mpca_refugee_disagg"
+name <- "oPt_mpca_chronic_disagg_poulation_11012022"
 saveRDS(result,paste(sprintf("output/RDS/result_%s.RDS", name)))
 
 
